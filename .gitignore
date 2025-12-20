@@ -1,0 +1,16 @@
+# Generated scoped context (regenerated on cd)
+.claude/scoped-rules.md
+.claude/session-notes.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies (uncomment as needed)
+# node_modules/
+# venv/
+# __pycache__/
+
+# Build output (uncomment as needed)
+# dist/
+# build/

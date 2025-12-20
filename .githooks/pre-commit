@@ -1,0 +1,52 @@
+#!/bin/bash
+# pre-commit hook: Review session notes before committing
+#
+# Checks for accumulated session notes and prompts for review.
+# Valuable patterns should be promoted to .claude-context.md.
+
+SESSION_NOTES=".claude/session-notes.md"
+
+# Skip if no session notes
+if [[ ! -f "$SESSION_NOTES" ]] || [[ ! -s "$SESSION_NOTES" ]]; then
+  exit 0
+fi
+
+# Count entries (sections separated by ---)
+ENTRY_COUNT=$(grep -c "^---$" "$SESSION_NOTES" 2>/dev/null || echo "0")
+
+if [[ "$ENTRY_COUNT" -gt 0 ]]; then
+  echo ""
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo "📝 Session Notes Review ($ENTRY_COUNT entries)"
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo ""
+  cat "$SESSION_NOTES"
+  echo ""
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo ""
+  echo "Review these notes. Promote valuable patterns to .claude-context.md"
+  echo ""
+  read -p "Continue with commit? [Y/n/edit] " response
+
+  case "${response,,}" in
+    n|no)
+      echo "Commit aborted. Review and promote notes first."
+      exit 1
+      ;;
+    e|edit)
+      ${EDITOR:-vim} "$SESSION_NOTES"
+      echo "Re-run commit when ready."
+      exit 1
+      ;;
+    *)
+      # Clear session notes after review
+      read -p "Clear session notes? [Y/n] " clear_response
+      if [[ "${clear_response,,}" != "n" && "${clear_response,,}" != "no" ]]; then
+        > "$SESSION_NOTES"
+        echo "Session notes cleared."
+      fi
+      ;;
+  esac
+fi
+
+exit 0

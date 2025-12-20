@@ -1,0 +1,18 @@
+#!/bin/bash
+# post-checkout hook: Regenerate scoped context for new branch
+#
+# Runs assemble-claude-context when switching branches to ensure
+# the scoped-rules.md reflects the current branch's context files.
+
+# Only run on branch checkout (not file checkout)
+# $3 is 1 for branch checkout, 0 for file checkout
+if [[ "$3" != "1" ]]; then
+  exit 0
+fi
+
+# Regenerate scoped context
+if command -v assemble-claude-context &> /dev/null; then
+  assemble-claude-context .claude/scoped-rules.md 2>/dev/null
+fi
+
+exit 0
