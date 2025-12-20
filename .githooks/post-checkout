@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # post-checkout hook: Regenerate scoped context for new branch
 #
 # Runs assemble-claude-context when switching branches to ensure

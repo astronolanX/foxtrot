@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # pre-commit hook: Review session notes before committing
 #
 # Checks for accumulated session notes and prompts for review.
@@ -26,9 +26,9 @@ if [[ "$ENTRY_COUNT" -gt 0 ]]; then
   echo ""
   echo "Review these notes. Promote valuable patterns to .claude-context.md"
   echo ""
-  read -p "Continue with commit? [Y/n/edit] " response
+  read "response?Continue with commit? [Y/n/edit] "
 
-  case "${response,,}" in
+  case "${response:l}" in
     n|no)
       echo "Commit aborted. Review and promote notes first."
       exit 1
@@ -40,8 +40,8 @@ if [[ "$ENTRY_COUNT" -gt 0 ]]; then
       ;;
     *)
       # Clear session notes after review
-      read -p "Clear session notes? [Y/n] " clear_response
-      if [[ "${clear_response,,}" != "n" && "${clear_response,,}" != "no" ]]; then
+      read "clear_response?Clear session notes? [Y/n] "
+      if [[ "${clear_response:l}" != "n" && "${clear_response:l}" != "no" ]]; then
         > "$SESSION_NOTES"
         echo "Session notes cleared."
       fi
