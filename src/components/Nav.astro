@@ -1,0 +1,36 @@
+---
+// Minimal corner mark
+---
+
+<nav class="nav" aria-label="Home">
+  <a href="/" class="nav-mark">N</a>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+  }
+
+  .nav-mark {
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+  }
+
+  .nav-mark:hover {
+    opacity: 0.8;
+    border-color: rgba(255,255,255,0.2);
+  }
+</style>

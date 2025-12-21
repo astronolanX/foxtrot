@@ -1,0 +1,312 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+
+<Base title="Component Architecture · Nolan" hideNav>
+  <div class="project">
+    <!-- Grain overlay -->
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- Back link -->
+    <nav class="back">
+      <a href="/" class="back-link">← back</a>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+      <span class="hero-number">01</span>
+      <h1 class="hero-title">Component Architecture</h1>
+      <p class="hero-meta">Design Systems · 2024</p>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+      <section class="intro">
+        <p class="lead">
+          Building scalable design systems from atomic principles. A framework for
+          components that compose without friction.
+        </p>
+      </section>
+
+      <!-- Image placeholder -->
+      <figure class="media">
+        <div class="media-placeholder">
+          <span>system diagram</span>
+        </div>
+      </figure>
+
+      <section class="body">
+        <h2>The Problem</h2>
+        <p>
+          Most component libraries grow organically. Teams add what they need, when they
+          need it. The result is inconsistency—buttons that don't quite match, spacing
+          that drifts, patterns that duplicate.
+        </p>
+        <p>
+          The challenge wasn't building components. It was building a system that would
+          scale without losing coherence.
+        </p>
+
+        <h2>Approach</h2>
+        <p>
+          Started with constraints: a strict type scale, a limited color palette,
+          spacing derived from a single base unit. Every component had to justify
+          its existence against these rules.
+        </p>
+
+        <div class="callout">
+          <p>Constraints aren't limitations—they're decisions made once so you don't have to make them again.</p>
+        </div>
+
+        <h2>Outcome</h2>
+        <p>
+          A 40-component library serving 12 product teams. Build time dropped 60%.
+          More importantly: designers and engineers started speaking the same language.
+        </p>
+      </section>
+
+      <!-- Image placeholder -->
+      <figure class="media wide">
+        <div class="media-placeholder">
+          <span>component grid</span>
+        </div>
+      </figure>
+
+      <section class="details">
+        <div class="detail">
+          <span class="detail-label">Role</span>
+          <span class="detail-value">Systems Lead</span>
+        </div>
+        <div class="detail">
+          <span class="detail-label">Duration</span>
+          <span class="detail-value">8 months</span>
+        </div>
+        <div class="detail">
+          <span class="detail-label">Stack</span>
+          <span class="detail-value">React, TypeScript, Figma</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- Next project -->
+    <footer class="next">
+      <a href="/work/typographic-systems" class="next-link">
+        <span class="next-label">Next</span>
+        <span class="next-title">Typographic Systems</span>
+      </a>
+    </footer>
+  </div>
+</Base>
+
+<style>
+  .project {
+    position: relative;
+    min-height: 100vh;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  /* Grain - darker for light bg */
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  /* Back nav */
+  .back {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+  }
+
+  .back-link {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-ink);
+  }
+
+  /* Hero */
+  .hero {
+    padding: 8rem 2rem 4rem;
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .hero-number {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--color-ink);
+  }
+
+  .hero-meta {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+  }
+
+  /* Content */
+  .content {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .intro {
+    margin-bottom: 3rem;
+  }
+
+  .lead {
+    font-size: var(--font-size-lg);
+    line-height: 1.5;
+    color: var(--color-ink-secondary);
+  }
+
+  /* Body text */
+  .body h2 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    font-weight: 400;
+    margin: 3rem 0 1rem;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    color: var(--color-ink);
+  }
+
+  .body p {
+    margin-bottom: 1rem;
+    color: var(--color-ink-secondary);
+    line-height: 1.7;
+  }
+
+  /* Callout */
+  .callout {
+    border-left: 2px solid var(--color-ink);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .callout p {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    color: var(--color-ink);
+    font-style: normal;
+  }
+
+  /* Media */
+  .media {
+    margin: 3rem 0;
+  }
+
+  .media.wide {
+    margin: 3rem -2rem;
+    max-width: calc(100% + 4rem);
+  }
+
+  .media-placeholder {
+    aspect-ratio: 16/9;
+    background: var(--color-paper-warm);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .media-placeholder span {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+  }
+
+  /* Details */
+  .details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .detail-label {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .detail-value {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink);
+  }
+
+  /* Next */
+  .next {
+    background: var(--color-paper-warm);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding: 4rem 2rem;
+  }
+
+  .next-link {
+    display: block;
+    max-width: 48rem;
+    margin: 0 auto;
+    color: var(--color-ink);
+    transition: opacity 0.2s ease;
+  }
+
+  .next-link:hover {
+    opacity: 0.6;
+  }
+
+  .next-label {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .next-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    color: var(--color-ink);
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .details {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .media.wide {
+      margin: 3rem -1rem;
+      max-width: calc(100% + 2rem);
+    }
+  }
+</style>

@@ -6,11 +6,9 @@
 .DS_Store
 Thumbs.db
 
-# Dependencies (uncomment as needed)
-# node_modules/
-# venv/
-# __pycache__/
+# Dependencies
+node_modules/
 
-# Build output (uncomment as needed)
-# dist/
-# build/
+# Build output
+dist/
+.astro/

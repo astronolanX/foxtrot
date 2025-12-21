@@ -1,0 +1,327 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Nolan · Design Systems">
+  <div class="world">
+    <!-- Grain overlay -->
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- Floating ambient shapes -->
+    <div class="shapes" aria-hidden="true">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Main content layer -->
+    <main class="content">
+      <!-- Central statement -->
+      <div class="statement">
+        <h1 class="statement-text">
+          <span class="word" data-depth="1">Nolan</span>
+        </h1>
+        <p class="statement-sub">systems & surfaces</p>
+      </div>
+
+      <!-- Floating fragments -->
+      <div class="fragments">
+        <span class="fragment" style="--x: 15%; --y: 20%; --delay: 0s;">systematic thinking</span>
+        <span class="fragment" style="--x: 75%; --y: 15%; --delay: 2s;">expressive design</span>
+        <span class="fragment" style="--x: 10%; --y: 70%; --delay: 4s;">constraint</span>
+        <span class="fragment" style="--x: 80%; --y: 75%; --delay: 1s;">expression</span>
+        <span class="fragment" style="--x: 50%; --y: 85%; --delay: 3s;">structure enables creativity</span>
+      </div>
+
+      <!-- Work orbs - abstract until hover -->
+      <div class="orbs">
+        <div class="orb" data-title="Component Architecture" style="--x: 25%; --y: 45%;">
+          <span class="orb-label">01</span>
+        </div>
+        <div class="orb" data-title="Typographic Systems" style="--x: 50%; --y: 55%;">
+          <span class="orb-label">02</span>
+        </div>
+        <div class="orb" data-title="Interaction Patterns" style="--x: 75%; --y: 40%;">
+          <span class="orb-label">03</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom info -->
+    <footer class="info">
+      <a href="mailto:hello@example.com" class="info-link">email</a>
+      <span class="info-divider">/</span>
+      <a href="https://twitter.com" class="info-link">twitter</a>
+      <span class="info-divider">/</span>
+      <a href="https://github.com" class="info-link">github</a>
+    </footer>
+  </div>
+</Base>
+
+<style>
+  /* World container - full viewport */
+  .world {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Film grain overlay */
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  /* Ambient floating shapes */
+  .shapes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    animation: drift 20s ease-in-out infinite;
+  }
+
+  .shape-1 {
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    top: -10%;
+    left: -10%;
+    animation-delay: 0s;
+  }
+
+  .shape-2 {
+    width: 30vw;
+    height: 30vw;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    bottom: 10%;
+    right: -5%;
+    animation-delay: -7s;
+  }
+
+  .shape-3 {
+    width: 25vw;
+    height: 25vw;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+    top: 40%;
+    left: 50%;
+    animation-delay: -14s;
+  }
+
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(5%, 10%) scale(1.05); }
+    50% { transform: translate(-5%, 5%) scale(0.95); }
+    75% { transform: translate(10%, -5%) scale(1.02); }
+  }
+
+  /* Main content */
+  .content {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Central statement */
+  .statement {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .statement-text {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+  }
+
+  .statement-sub {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-top: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: lowercase;
+  }
+
+  .word {
+    display: inline-block;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+  }
+
+  /* Floating fragments */
+  .fragments {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .fragment {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    opacity: 0;
+    animation: fadeFloat 12s ease-in-out infinite;
+    animation-delay: var(--delay);
+  }
+
+  @keyframes fadeFloat {
+    0%, 100% { opacity: 0; transform: translate(0, 0); }
+    20%, 80% { opacity: 0.4; }
+    50% { opacity: 0.6; transform: translate(10px, -10px); }
+  }
+
+  /* Work orbs */
+  .orbs {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 15;
+  }
+
+  .orb {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .orb::before {
+    content: attr(data-title);
+    position: absolute;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  .orb:hover {
+    width: 120px;
+    height: 120px;
+    border-color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .orb:hover::before {
+    opacity: 1;
+    transform: translateY(70px);
+  }
+
+  .orb:hover .orb-label {
+    opacity: 0;
+  }
+
+  .orb-label {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Footer info */
+  .info {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    gap: 1rem;
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+  }
+
+  .info-link {
+    opacity: 0.4;
+    transition: opacity 0.2s ease;
+  }
+
+  .info-link:hover {
+    opacity: 1;
+  }
+
+  .info-divider {
+    opacity: 0.2;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .orbs {
+      display: none;
+    }
+
+    .fragment {
+      display: none;
+    }
+
+    .statement-text {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+</style>
+
+<script>
+  // Parallax on mouse move
+  const words = document.querySelectorAll('.word[data-depth]');
+  const orbs = document.querySelectorAll('.orb');
+
+  document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2;
+    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+    words.forEach(word => {
+      const depth = parseFloat(word.getAttribute('data-depth') || '1');
+      const moveX = x * 10 * depth;
+      const moveY = y * 5 * depth;
+      (word as HTMLElement).style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+
+    orbs.forEach((orb, i) => {
+      const depth = 0.5 + (i * 0.2);
+      const moveX = x * 15 * depth;
+      const moveY = y * 10 * depth;
+      (orb as HTMLElement).style.marginLeft = `${moveX}px`;
+      (orb as HTMLElement).style.marginTop = `${moveY}px`;
+    });
+  });
+</script>

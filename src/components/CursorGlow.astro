@@ -1,0 +1,70 @@
+---
+// Ambient cursor glow effect
+// Renders a soft radial gradient that follows the mouse
+---
+
+<div class="cursor-glow" aria-hidden="true"></div>
+
+<style>
+  .cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(255, 255, 255, 0.01) 25%,
+      transparent 50%
+    );
+    transform: translate(-50%, -50%);
+  }
+
+  .cursor-glow.active {
+    opacity: 1;
+  }
+
+  /* Hide on touch devices */
+  @media (hover: none) {
+    .cursor-glow {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const glow = document.querySelector('.cursor-glow') as HTMLElement;
+
+  if (glow && window.matchMedia('(hover: hover)').matches) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let glowX = 0;
+    let glowY = 0;
+
+    // Smooth follow with lerp
+    function animate() {
+      glowX += (mouseX - glowX) * 0.1;
+      glowY += (mouseY - glowY) * 0.1;
+      glow.style.left = `${glowX}px`;
+      glow.style.top = `${glowY}px`;
+      requestAnimationFrame(animate);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      glow.classList.add('active');
+    });
+
+    document.addEventListener('mouseleave', () => {
+      glow.classList.remove('active');
+    });
+
+    animate();
+  }
+</script>
