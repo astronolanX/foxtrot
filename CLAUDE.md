@@ -18,9 +18,24 @@ Design systems portfolio — experimental, not traditional.
 
 1. Wire up orbs to actual project pages
 2. Add more project pages (Typographic Systems, Interaction Patterns)
-3. Theory section/pages
-4. Content — real case studies, not placeholder
-5. Deploy to Vercel
+3. Content — real case studies, not placeholder
+4. Deploy to Vercel
+
+## Backlog: Theories
+
+Conceptual/philosophical content about design systems thinking. Decisions TBD.
+
+### Open Questions
+- [ ] Access point: orbs, footer link, or separate section?
+- [ ] Visual treatment: newspaper, dark, or something new?
+- [ ] Content type: short essays, long articles, or axioms?
+
+### Candidate Topics
+- [ ] Constraint as creative fuel
+- [ ] The grammar of components
+- [ ] Why systems fail
+- [ ] Tokens vs. decisions
+- [ ] The cost of flexibility
 
 ## Quick Reference
 
