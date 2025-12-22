@@ -2,7 +2,7 @@
 import Base from "../../layouts/Base.astro";
 ---
 
-<Base title="Typographic Systems · Nolan" hideNav>
+<Base title="Semantic Negotiation Layer · Nolan">
   <div class="project">
     <!-- Grain overlay -->
     <div class="grain" aria-hidden="true"></div>
@@ -14,86 +14,104 @@ import Base from "../../layouts/Base.astro";
 
     <!-- Hero -->
     <header class="hero">
-      <span class="hero-number">02</span>
-      <h1 class="hero-title">Typographic Systems</h1>
-      <p class="hero-meta">Design Systems · 2024</p>
+      <span class="hero-tag">theory</span>
+      <h1 class="hero-title">Semantic Negotiation Layer</h1>
+      <p class="hero-meta">Design Systems Infrastructure</p>
     </header>
 
     <!-- Content -->
     <main class="content">
       <section class="intro">
         <p class="lead">
-          Creating coherent type systems that scale across products. From tokens to
-          implementation, building typography that works.
+          What if components could explain their constraints to AI agents—and negotiate
+          alternatives when those constraints are violated?
         </p>
       </section>
 
       <!-- Image placeholder -->
       <figure class="media">
         <div class="media-placeholder">
-          <span>type scale diagram</span>
+          <span>negotiation flow diagram</span>
         </div>
       </figure>
 
       <section class="body">
         <h2>The Problem</h2>
         <p>
-          Typography decisions were scattered. Each product picked its own sizes,
-          weights, and line heights. The result was visual inconsistency and
-          implementation overhead—designers and developers constantly debating pixels.
+          AI agents generating UI code don't understand <em>why</em> a button has specific
+          padding or why a card enforces maximum content length. They pattern-match from
+          examples, missing the semantic intent behind design decisions.
         </p>
         <p>
-          The challenge was creating a type system flexible enough for diverse use
-          cases but constrained enough to maintain cohesion.
+          The result: syntactically correct code that violates design system principles.
+          A button with a 200-character label. A card nested inside another card. Spacing
+          that "looks right" but breaks the underlying system.
         </p>
 
-        <h2>Approach</h2>
+        <h2>The Proposal</h2>
         <p>
-          Built on a modular scale (Major Third, 1.250). Every size derives from
-          the base, creating mathematical relationships that feel harmonious.
-          Line heights and spacing follow the same logic.
+          Components expose a machine-readable negotiation interface—not just props, but
+          constraint rationales. When an agent requests something invalid, the component
+          responds with alternatives rather than silent failure.
         </p>
 
         <div class="callout">
-          <p>Good typography is invisible. Bad typography is everywhere.</p>
+          <p>Agent: "Button with label 'Submit your application for review and approval'"</p>
+          <p>Component: "Label exceeds 40 characters. Options: truncate, wrap, or use a different pattern."</p>
         </div>
 
-        <h2>Outcome</h2>
         <p>
-          A single type scale serving 8 products. Design handoff time cut in half.
-          More importantly: the debates stopped. When typography is systematic,
-          decisions are already made.
+          The agent negotiates with the component rather than blindly overriding. Constraints
+          become collaborative, not adversarial.
+        </p>
+
+        <h2>Why Now</h2>
+        <p>
+          LLMs excel at natural language reasoning but struggle with implicit constraint
+          satisfaction. As agentic development scales, the cost of design system violations
+          grows exponentially. MCP (Model Context Protocol) provides structure but not
+          semantic intent—53% of organizations remain paralyzed by AI integration uncertainty.
+        </p>
+        <p>
+          Structured negotiation beats post-hoc linting. Prevention over correction.
+        </p>
+
+        <h2>Prior Art</h2>
+        <p>
+          TypeScript's type negotiation. GraphQL schema introspection. Apple's SF Symbols
+          with built-in rendering constraints. Zod schema validation with custom error
+          messages. The pattern exists—it hasn't been applied to design systems.
         </p>
       </section>
 
       <!-- Image placeholder -->
       <figure class="media wide">
         <div class="media-placeholder">
-          <span>type specimens</span>
+          <span>constraint communication model</span>
         </div>
       </figure>
 
       <section class="details">
         <div class="detail">
-          <span class="detail-label">Role</span>
-          <span class="detail-value">Typography Lead</span>
+          <span class="detail-label">Domain</span>
+          <span class="detail-value">Agent-Component Interfaces</span>
         </div>
         <div class="detail">
-          <span class="detail-label">Duration</span>
-          <span class="detail-value">4 months</span>
+          <span class="detail-label">Status</span>
+          <span class="detail-value">Theoretical Proposal</span>
         </div>
         <div class="detail">
-          <span class="detail-label">Stack</span>
-          <span class="detail-value">Figma, CSS Custom Properties</span>
+          <span class="detail-label">Dependencies</span>
+          <span class="detail-value">MCP, Structured Schemas</span>
         </div>
       </section>
     </main>
 
     <!-- Next project -->
     <footer class="next">
-      <a href="/work/interaction-patterns" class="next-link">
+      <a href="/work/agent-credentialing" class="next-link">
         <span class="next-label">Next</span>
-        <span class="next-title">Interaction Patterns</span>
+        <span class="next-title">Agent Credentialing System</span>
       </a>
     </footer>
   </div>
@@ -141,12 +159,13 @@ import Base from "../../layouts/Base.astro";
     margin: 0 auto;
   }
 
-  .hero-number {
+  .hero-tag {
     font-family: var(--font-display);
     font-size: var(--font-size-sm);
     color: var(--color-ink-muted);
     display: block;
     margin-bottom: 1rem;
+    text-transform: lowercase;
   }
 
   .hero-title {
@@ -196,6 +215,10 @@ import Base from "../../layouts/Base.astro";
     line-height: 1.7;
   }
 
+  .body em {
+    font-style: italic;
+  }
+
   .callout {
     border-left: 2px solid var(--color-ink);
     padding-left: 1.5rem;
@@ -204,9 +227,18 @@ import Base from "../../layouts/Base.astro";
 
   .callout p {
     font-family: var(--font-display);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-sm);
     color: var(--color-ink);
     font-style: normal;
+    margin: 0.5rem 0;
+  }
+
+  .callout p:first-child {
+    margin-top: 0;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
   }
 
   .media {

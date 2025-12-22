@@ -1,14 +1,12 @@
 ---
 import CursorGlow from "../components/CursorGlow.astro";
-import Nav from "../components/Nav.astro";
 
 interface Props {
   title: string;
   description?: string;
-  hideNav?: boolean;
 }
 
-const { title, description = "Design systems portfolio", hideNav = false } = Astro.props;
+const { title, description = "Design systems portfolio" } = Astro.props;
 ---
 
 <!doctype html>
@@ -32,7 +30,6 @@ const { title, description = "Design systems portfolio", hideNav = false } = Ast
   </head>
   <body>
     <CursorGlow />
-    {!hideNav && <Nav />}
     <slot />
   </body>
 </html>

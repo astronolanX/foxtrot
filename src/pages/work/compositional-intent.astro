@@ -2,7 +2,7 @@
 import Base from "../../layouts/Base.astro";
 ---
 
-<Base title="Component Architecture · Nolan" hideNav>
+<Base title="Compositional Intent Graphs · Nolan">
   <div class="project">
     <!-- Grain overlay -->
     <div class="grain" aria-hidden="true"></div>
@@ -14,85 +14,112 @@ import Base from "../../layouts/Base.astro";
 
     <!-- Hero -->
     <header class="hero">
-      <span class="hero-number">01</span>
-      <h1 class="hero-title">Component Architecture</h1>
-      <p class="hero-meta">Design Systems · 2024</p>
+      <span class="hero-tag">theory</span>
+      <h1 class="hero-title">Compositional Intent Graphs</h1>
+      <p class="hero-meta">Design Systems Infrastructure</p>
     </header>
 
     <!-- Content -->
     <main class="content">
       <section class="intro">
         <p class="lead">
-          Building scalable design systems from atomic principles. A framework for
-          components that compose without friction.
+          Components don't exist in isolation—they exist in relationships. A
+          graph-based model that captures not just what components are, but
+          how they're meant to work together.
         </p>
       </section>
 
       <!-- Image placeholder -->
       <figure class="media">
         <div class="media-placeholder">
-          <span>system diagram</span>
+          <span>intent graph visualization</span>
         </div>
       </figure>
 
       <section class="body">
         <h2>The Problem</h2>
         <p>
-          Most component libraries grow organically. Teams add what they need, when they
-          need it. The result is inconsistency—buttons that don't quite match, spacing
-          that drifts, patterns that duplicate.
+          Design systems document components as independent units. Button has
+          props. Card has slots. Modal has variants. But the real knowledge—
+          which components belong together, which combinations violate intent,
+          which patterns work at scale—lives in tribal knowledge and code review
+          comments.
         </p>
         <p>
-          The challenge wasn't building components. It was building a system that would
-          scale without losing coherence.
+          AI agents generating UI lack this compositional understanding. They
+          can read component APIs but not the invisible graph of relationships
+          between them.
         </p>
 
-        <h2>Approach</h2>
+        <h2>The Proposal</h2>
         <p>
-          Started with constraints: a strict type scale, a limited color palette,
-          spacing derived from a single base unit. Every component had to justify
-          its existence against these rules.
+          Explicit graphs of component relationships. Not just "Button exists"
+          but "Button + Icon is valid, Button inside Button is invalid, Button
+          in Card footer is the primary action pattern."
         </p>
 
         <div class="callout">
-          <p>Constraints aren't limitations—they're decisions made once so you don't have to make them again.</p>
+          <p>Nodes: Components with their constraints</p>
+          <p>Edges: Valid compositions with context</p>
+          <p>Weights: Preference scores for common patterns</p>
         </div>
 
-        <h2>Outcome</h2>
         <p>
-          A 40-component library serving 12 product teams. Build time dropped 60%.
-          More importantly: designers and engineers started speaking the same language.
+          When an agent proposes a component tree, the graph validates structure
+          before rendering. Invalid compositions fail fast with explanations.
+          Unusual-but-valid combinations get flagged for human review.
+        </p>
+
+        <h2>Why Now</h2>
+        <p>
+          Agentic development doesn't just generate components—it generates
+          compositions. The failure mode isn't "wrong button" but "wrong
+          arrangement of correct buttons." Current linting catches syntax;
+          intent graphs catch semantics.
+        </p>
+        <p>
+          GraphQL proved that explicit schemas beat implicit assumptions. The
+          same principle applies: make the composition rules machine-readable,
+          and machines can follow them.
+        </p>
+
+        <h2>Prior Art</h2>
+        <p>
+          Figma's auto-layout constraints. SwiftUI's view builder restrictions.
+          HTML's content model (block vs inline). BEM methodology's implicit
+          hierarchy. The concept exists in fragments—it needs consolidation
+          into a formal, queryable structure.
         </p>
       </section>
 
       <!-- Image placeholder -->
       <figure class="media wide">
         <div class="media-placeholder">
-          <span>component grid</span>
+          <span>composition validation flow</span>
         </div>
       </figure>
 
       <section class="details">
         <div class="detail">
-          <span class="detail-label">Role</span>
-          <span class="detail-value">Systems Lead</span>
+          <span class="detail-label">Domain</span>
+          <span class="detail-value">Component Relationships</span>
         </div>
         <div class="detail">
-          <span class="detail-label">Duration</span>
-          <span class="detail-value">8 months</span>
+          <span class="detail-label">Status</span>
+          <span class="detail-value">Theoretical Proposal</span>
         </div>
         <div class="detail">
-          <span class="detail-label">Stack</span>
-          <span class="detail-value">React, TypeScript, Figma</span>
+          <span class="detail-label">Dependencies</span>
+          <span class="detail-value">Schema Definition, Graph DB</span>
         </div>
       </section>
     </main>
 
     <!-- Next project -->
     <footer class="next">
-      <a href="/work/typographic-systems" class="next-link">
+      <a href="/work/onboarding-digitization" class="next-link">
         <span class="next-label">Next</span>
-        <span class="next-title">Typographic Systems</span>
+        <span class="next-title">Onboarding Digitization</span>
       </a>
     </footer>
   </div>
@@ -106,7 +133,6 @@ import Base from "../../layouts/Base.astro";
     color: var(--color-ink);
   }
 
-  /* Grain - darker for light bg */
   .grain {
     position: fixed;
     inset: 0;
@@ -117,7 +143,6 @@ import Base from "../../layouts/Base.astro";
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   }
 
-  /* Back nav */
   .back {
     position: fixed;
     top: 2rem;
@@ -136,19 +161,19 @@ import Base from "../../layouts/Base.astro";
     color: var(--color-ink);
   }
 
-  /* Hero */
   .hero {
     padding: 8rem 2rem 4rem;
     max-width: 48rem;
     margin: 0 auto;
   }
 
-  .hero-number {
+  .hero-tag {
     font-family: var(--font-display);
     font-size: var(--font-size-sm);
     color: var(--color-ink-muted);
     display: block;
     margin-bottom: 1rem;
+    text-transform: lowercase;
   }
 
   .hero-title {
@@ -166,7 +191,6 @@ import Base from "../../layouts/Base.astro";
     color: var(--color-ink-muted);
   }
 
-  /* Content */
   .content {
     max-width: 48rem;
     margin: 0 auto;
@@ -183,7 +207,6 @@ import Base from "../../layouts/Base.astro";
     color: var(--color-ink-secondary);
   }
 
-  /* Body text */
   .body h2 {
     font-family: var(--font-display);
     font-size: var(--font-size-base);
@@ -200,7 +223,6 @@ import Base from "../../layouts/Base.astro";
     line-height: 1.7;
   }
 
-  /* Callout */
   .callout {
     border-left: 2px solid var(--color-ink);
     padding-left: 1.5rem;
@@ -209,12 +231,20 @@ import Base from "../../layouts/Base.astro";
 
   .callout p {
     font-family: var(--font-display);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-sm);
     color: var(--color-ink);
     font-style: normal;
+    margin: 0.5rem 0;
   }
 
-  /* Media */
+  .callout p:first-child {
+    margin-top: 0;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
   .media {
     margin: 3rem 0;
   }
@@ -240,7 +270,6 @@ import Base from "../../layouts/Base.astro";
     color: var(--color-ink-muted);
   }
 
-  /* Details */
   .details {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -264,7 +293,6 @@ import Base from "../../layouts/Base.astro";
     color: var(--color-ink);
   }
 
-  /* Next */
   .next {
     background: var(--color-paper-warm);
     border-top: 1px solid rgba(0,0,0,0.05);
@@ -297,14 +325,12 @@ import Base from "../../layouts/Base.astro";
     color: var(--color-ink);
   }
 
-  /* Focus states */
   .back-link:focus-visible,
   .next-link:focus-visible {
     outline: 2px solid var(--color-ink);
     outline-offset: 4px;
   }
 
-  /* Active/pressed states */
   .back-link:active {
     opacity: 0.5;
   }
@@ -313,7 +339,6 @@ import Base from "../../layouts/Base.astro";
     opacity: 0.4;
   }
 
-  /* Tablet */
   @media (max-width: 768px) {
     .hero {
       padding: 6rem 1.5rem 3rem;
@@ -333,7 +358,6 @@ import Base from "../../layouts/Base.astro";
     }
   }
 
-  /* Mobile */
   @media (max-width: 640px) {
     .back {
       position: relative;
@@ -387,7 +411,6 @@ import Base from "../../layouts/Base.astro";
     }
   }
 
-  /* Small mobile */
   @media (max-width: 380px) {
     .hero-title {
       font-size: 1.5rem;

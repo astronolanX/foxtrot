@@ -23,7 +23,7 @@ import Base from "../layouts/Base.astro";
       </div>
 
       <!-- Floating fragments -->
-      <div class="fragments">
+      <div class="fragments" aria-hidden="true">
         <span class="fragment" style="--x: 15%; --y: 20%; --delay: 0s;">systematic thinking</span>
         <span class="fragment" style="--x: 75%; --y: 15%; --delay: 2s;">expressive design</span>
         <span class="fragment" style="--x: 10%; --y: 70%; --delay: 4s;">constraint</span>
@@ -31,32 +31,28 @@ import Base from "../layouts/Base.astro";
         <span class="fragment" style="--x: 50%; --y: 85%; --delay: 3s;">structure enables creativity</span>
       </div>
 
-      <!-- Work orbs - abstract until hover (desktop) -->
-      <div class="orbs">
-        <a href="/work/component-architecture" class="orb" data-title="Component Architecture" style="--x: 25%; --y: 45%;">
-          <span class="orb-label">01</span>
-        </a>
-        <a href="/work/typographic-systems" class="orb" data-title="Typographic Systems" style="--x: 50%; --y: 55%;">
-          <span class="orb-label">02</span>
-        </a>
-        <a href="/work/interaction-patterns" class="orb" data-title="Interaction Patterns" style="--x: 75%; --y: 40%;">
-          <span class="orb-label">03</span>
-        </a>
-      </div>
-
-      <!-- Mobile work list (shows when orbs hidden) -->
+      <!-- Work list -->
       <nav class="work-list" aria-label="Projects">
-        <a href="/work/component-architecture" class="work-item">
-          <span class="work-number">01</span>
-          <span class="work-title">Component Architecture</span>
+        <!-- Theories -->
+        <div class="work-section">
+          <span class="work-section-title">theory</span>
+        </div>
+        <a href="/work/semantic-negotiation" class="work-item">
+          <span class="work-title">Semantic Negotiation Layer</span>
         </a>
-        <a href="/work/typographic-systems" class="work-item">
-          <span class="work-number">02</span>
-          <span class="work-title">Typographic Systems</span>
+        <a href="/work/agent-credentialing" class="work-item">
+          <span class="work-title">Agent Credentialing System</span>
         </a>
-        <a href="/work/interaction-patterns" class="work-item">
-          <span class="work-number">03</span>
-          <span class="work-title">Interaction Patterns</span>
+        <a href="/work/compositional-intent" class="work-item">
+          <span class="work-title">Compositional Intent Graphs</span>
+        </a>
+
+        <!-- Case Studies -->
+        <div class="work-section">
+          <span class="work-section-title">case study</span>
+        </div>
+        <a href="/work/onboarding-digitization" class="work-item">
+          <span class="work-title">Onboarding Digitization</span>
         </a>
       </nav>
     </main>
@@ -146,14 +142,16 @@ import Base from "../layouts/Base.astro";
     z-index: 10;
     flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 4rem 2rem 8rem;
+    gap: 3rem;
   }
 
   /* Central statement */
   .statement {
     text-align: center;
-    padding: 2rem;
   }
 
   .statement-text {
@@ -200,64 +198,51 @@ import Base from "../layouts/Base.astro";
     50% { opacity: 0.6; transform: translate(10px, -10px); }
   }
 
-  /* Work orbs */
-  .orbs {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 15;
-  }
-
-  .orb {
-    position: absolute;
-    left: var(--x);
-    top: var(--y);
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 50%;
+  /* Work list */
+  .work-list {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: auto;
-    cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-direction: column;
+    width: 100%;
+    max-width: 28rem;
   }
 
-  .orb::before {
-    content: attr(data-title);
-    position: absolute;
-    white-space: nowrap;
+  .work-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.2s ease;
+  }
+
+  .work-item:first-child {
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .work-title {
     font-family: var(--font-display);
-    font-size: var(--font-size-lg);
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-    pointer-events: none;
+    font-size: var(--font-size-base);
+    transition: opacity 0.2s ease;
   }
 
-  .orb:hover {
-    width: 120px;
-    height: 120px;
-    border-color: rgba(255,255,255,0.3);
-    background: rgba(255,255,255,0.02);
+  .work-section {
+    padding: 1.5rem 0 0.75rem;
+    margin-top: 1rem;
   }
 
-  .orb:hover::before {
-    opacity: 1;
-    transform: translateY(70px);
+  .work-section:first-child {
+    margin-top: 0;
+    padding-top: 0;
   }
 
-  .orb:hover .orb-label {
-    opacity: 0;
-  }
-
-  .orb-label {
+  .work-section-title {
     font-family: var(--font-display);
     font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
     opacity: 0.4;
-    transition: opacity 0.3s ease;
+    text-transform: lowercase;
+    letter-spacing: 0.1em;
   }
 
   /* Footer info */
@@ -286,42 +271,7 @@ import Base from "../layouts/Base.astro";
     opacity: 0.2;
   }
 
-  /* Mobile work list - hidden on desktop */
-  .work-list {
-    display: none;
-  }
-
-  .work-item {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    transition: all 0.2s ease;
-  }
-
-  .work-item:first-child {
-    border-top: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .work-number {
-    font-family: var(--font-display);
-    font-size: var(--font-size-sm);
-    opacity: 0.4;
-    min-width: 2rem;
-  }
-
-  .work-title {
-    font-family: var(--font-display);
-    font-size: var(--font-size-base);
-  }
-
   /* Focus states */
-  .orb:focus-visible {
-    outline: 2px solid rgba(255,255,255,0.5);
-    outline-offset: 4px;
-  }
-
   .info-link:focus-visible,
   .work-item:focus-visible {
     outline: 2px solid rgba(255,255,255,0.5);
@@ -329,10 +279,6 @@ import Base from "../layouts/Base.astro";
   }
 
   /* Active/pressed states */
-  .orb:active {
-    transform: translate(-50%, -50%) scale(0.95);
-  }
-
   .info-link:active {
     opacity: 0.6;
   }
@@ -344,49 +290,21 @@ import Base from "../layouts/Base.astro";
   /* Hover states for work list */
   .work-item:hover {
     background: rgba(255,255,255,0.02);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
   }
 
-  .work-item:hover .work-number {
-    opacity: 0.8;
-  }
-
+  
   /* Responsive */
   @media (max-width: 768px) {
-    .orbs {
-      display: none;
-    }
-
     .fragment {
       display: none;
     }
 
-    .work-list {
-      display: block;
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 20rem;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
     .content {
-      flex-direction: column;
-      justify-content: center;
-      padding-bottom: 6rem;
-    }
-
-    .statement {
-      padding-top: 4rem;
-    }
-
-    .info {
-      padding: 0 1rem;
-    }
-
-    .info-link {
-      padding: 0.5rem;
-      margin: -0.5rem;
+      padding: 3rem 1.5rem 6rem;
     }
   }
 
@@ -403,24 +321,12 @@ import Base from "../layouts/Base.astro";
       flex-wrap: wrap;
       justify-content: center;
       gap: 0.5rem 1rem;
+      padding: 0 1rem;
+    }
+
+    .info-link {
+      padding: 0.5rem;
+      margin: -0.5rem;
     }
   }
 </style>
-
-<script>
-  // Parallax on mouse move (orbs only)
-  const orbs = document.querySelectorAll('.orb');
-
-  document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 2;
-    const y = (e.clientY / window.innerHeight - 0.5) * 2;
-
-    orbs.forEach((orb, i) => {
-      const depth = 0.5 + (i * 0.2);
-      const moveX = x * 15 * depth;
-      const moveY = y * 10 * depth;
-      (orb as HTMLElement).style.marginLeft = `${moveX}px`;
-      (orb as HTMLElement).style.marginTop = `${moveY}px`;
-    });
-  });
-</script>
