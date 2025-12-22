@@ -2,40 +2,65 @@
 
 Design systems portfolio — experimental, not traditional.
 
-## Status: Phase 1 Complete
+## Status: Phase 2 Complete
 
-**Last session**: 2024-12-20
-**Last commit**: `feat: experimental homepage and newspaper project pages`
+**Last session**: 2024-12-21
+**Last commit**: `feat: add theory pages and case study with navigation loop`
 
 ### What's Built
 
-- **Homepage** (`/`) — Dark atmospheric with parallax text, floating fragments, work orbs that reveal on hover
-- **Project page** (`/work/component-architecture`) — Newspaper-style light theme with editorial layout
+- **Homepage** (`/`) — Dark atmospheric with floating fragments, partitioned list view
+- **Theory pages** (3) — Semantic Negotiation, Agent Credentialing, Compositional Intent
+- **Case study** (1) — Onboarding Digitization with real metrics
+- **Navigation loop** — Circular Next links between all project pages
 - **Design tokens** — Typography scale, color palette, spacing in `global.css`
-- **Components** — CursorGlow, Nav, Base layout
+- **Components** — CursorGlow, Base layout
 
 ### What's Next
 
-1. Wire up orbs to actual project pages
-2. Add more project pages (Typographic Systems, Interaction Patterns)
-3. Content — real case studies, not placeholder
-4. Deploy to Vercel
+1. Add media/diagrams to theory pages (currently placeholders)
+2. Deploy to Vercel
+3. Consider additional theories from backlog
 
-## Backlog: Theories
+## Theory Ideas
 
-Conceptual/philosophical content about design systems thinking. Decisions TBD.
+Reference for future theory content. Mix of AI-forward concepts and foundational thinking.
 
-### Open Questions
-- [ ] Access point: orbs, footer link, or separate section?
-- [ ] Visual treatment: newspaper, dark, or something new?
-- [ ] Content type: short essays, long articles, or axioms?
+### Implemented
 
-### Candidate Topics
-- [ ] Constraint as creative fuel
-- [ ] The grammar of components
-- [ ] Why systems fail
-- [ ] Tokens vs. decisions
-- [ ] The cost of flexibility
+| Title | Domain | Concept |
+|-------|--------|---------|
+| Semantic Negotiation Layer | Agent-Component Interfaces | Components explain constraints to AI, negotiate alternatives |
+| Agent Credentialing System | Trust & Governance | Graduated permissions based on demonstrated competence |
+| Compositional Intent Graphs | Component Relationships | Graph-based model of valid component compositions |
+
+### Backlog: Tooling & Adoption
+
+Practical tools for design system governance and product team enablement:
+
+- **Component Telemetry Dashboard** — Components report usage data back to design systems team
+- **Lift Kit** — Agent skill that helps product teams adopt design system style streams
+- **Content Scanner** — Recommends changes to align with design system rules
+
+### Backlog: AI-Forward
+
+Generated concepts for design systems in an agentic world:
+
+- **Style Provenance Chain** — Track where design decisions came from (human vs AI)
+- **Token Diffusion Networks** — How design tokens propagate through agentic pipelines
+- **Ambient Specification Mining** — AI discovers patterns from codebase, not just docs
+- **Failure-Mode Libraries** — Catalog of how AI breaks design systems, with prevention
+- **Temporal Coherence Contracts** — Ensure AI-generated UI stays consistent over time
+
+### Backlog: Foundational
+
+Original conceptual topics about design systems thinking:
+
+- **Constraint as creative fuel** — How limitations drive better design
+- **The grammar of components** — Linguistic view of component composition
+- **Why systems fail** — Common failure modes in design systems
+- **Tokens vs. decisions** — When abstraction helps vs when it hides intent
+- **The cost of flexibility** — Trade-offs of making everything configurable
 
 ## Quick Reference
 
@@ -49,23 +74,26 @@ npm run build    # static output to dist/
 | Decision | Choice | Why |
 |----------|--------|-----|
 | Fonts | JetBrains Mono + DM Sans | Technical feel, two fonts only |
-| Homepage | Experimental/atmospheric | Phantom.Land-inspired, not traditional |
+| Homepage | List view with sections | Cleaner than orbs, mobile-friendly |
 | Project pages | Newspaper light theme | Contrast shift, editorial feel |
-| Layout | Single-page hero → content pages | Impact first, depth on click |
+| Theory format | Problem/Proposal/Why Now/Prior Art | Structured argumentation |
+| Navigation | Circular Next links | Encourages exploration |
 
 ## File Structure
 
 ```
 src/
 ├── components/
-│   ├── CursorGlow.astro    # Mouse-follow ambient glow
-│   └── Nav.astro           # Minimal "N" mark (homepage only)
+│   └── CursorGlow.astro    # Mouse-follow ambient glow
 ├── layouts/
-│   └── Base.astro          # Fonts, meta, hideNav prop
+│   └── Base.astro          # Fonts, meta
 ├── pages/
-│   ├── index.astro         # Experimental homepage
+│   ├── index.astro         # Homepage with partitioned list
 │   └── work/
-│       └── component-architecture.astro
+│       ├── semantic-negotiation.astro
+│       ├── agent-credentialing.astro
+│       ├── compositional-intent.astro
+│       └── onboarding-digitization.astro
 ├── styles/
 │   └── global.css          # Design tokens via @theme
 └── content/
