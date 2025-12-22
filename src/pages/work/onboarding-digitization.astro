@@ -287,11 +287,14 @@ import Base from "../../layouts/Base.astro";
     font-family: var(--font-display);
     font-size: var(--font-size-sm);
     color: var(--color-ink-muted);
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
   }
 
   .back-link:hover {
-    color: var(--color-ink);
+    color: var(--color-paper);
+    background: var(--color-ink);
+    padding: 0.2em 0.4em;
+    margin: -0.2em -0.4em;
   }
 
   .hero {
@@ -497,11 +500,18 @@ import Base from "../../layouts/Base.astro";
     max-width: 48rem;
     margin: 0 auto;
     color: var(--color-ink);
-    transition: opacity 0.2s ease;
+    transition: all 0.2s ease;
   }
 
   .next-link:hover {
-    opacity: 0.6;
+    opacity: 1;
+  }
+
+  .next-link:hover .next-title {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: 0.15em 0.35em;
+    margin: -0.15em -0.35em;
   }
 
   .next-label {
@@ -516,6 +526,7 @@ import Base from "../../layouts/Base.astro";
     font-family: var(--font-display);
     font-size: var(--font-size-xl);
     color: var(--color-ink);
+    transition: all 0.2s ease;
   }
 
   .back-link:focus-visible,

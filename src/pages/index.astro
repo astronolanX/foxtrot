@@ -294,11 +294,15 @@ import Base from "../layouts/Base.astro";
 
   .info-link {
     opacity: 0.4;
-    transition: opacity 0.2s ease;
+    transition: all 0.2s ease;
   }
 
   .info-link:hover {
     opacity: 1;
+    background: var(--color-text-primary);
+    color: var(--color-surface-deep);
+    padding: 0.15em 0.35em;
+    margin: -0.15em -0.35em;
   }
 
   .info-divider {
