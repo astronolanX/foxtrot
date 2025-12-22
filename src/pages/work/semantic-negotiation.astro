@@ -81,20 +81,20 @@ import ComponentDemo from "../../components/ComponentDemo.astro";
             { label: "Request", code: `agent.request({
   component: "Button",
   props: { label: "Submit your application for review and approval" }
-})` },
+})`, caption: "Agent requests a Button with a 52-character label" },
             { label: "Constraint", code: `component.constraint({
   violated: "label.maxLength",
   limit: 40,
   actual: 52,
   rationale: "Labels over 40 chars break mobile layout"
-})` },
+})`, caption: "Component explains the violation and its rationale" },
             { label: "Alternatives", code: `component.alternatives([
   { action: "truncate", result: "Submit your application..." },
   { action: "wrap", result: "Multi-line button" },
   { action: "split", result: "Use secondary action pattern" }
-])` },
+])`, caption: "Component offers valid options to resolve the constraint" },
             { label: "Resolution", code: `agent.select("truncate")
-// Component renders with truncated label` }
+// Component renders with truncated label`, caption: "Agent selects an option; component renders accordingly" }
           ]}
         />
 

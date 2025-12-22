@@ -1,7 +1,13 @@
 ---
+/**
+ * CodeTabs - CSS-only tabbed code examples with per-tab captions
+ * Uses radio inputs + sibling selectors for zero-JS tab switching
+ */
+
 interface Tab {
   label: string;
   code: string;
+  caption?: string;
 }
 
 interface Props {
@@ -10,6 +16,7 @@ interface Props {
 }
 
 const { tabs, id = `codetabs-${Math.random().toString(36).slice(2, 8)}` } = Astro.props;
+const hasCaptions = tabs.some(tab => tab.caption);
 ---
 
 <div class="code-tabs">
@@ -43,6 +50,16 @@ const { tabs, id = `codetabs-${Math.random().toString(36).slice(2, 8)}` } = Astr
       </div>
     ))}
   </div>
+
+  {hasCaptions && (
+    <div class="tab-captions">
+      {tabs.map((tab, index) => (
+        <p class="tab-caption" data-index={index}>
+          {tab.caption || ''}
+        </p>
+      ))}
+    </div>
+  )}
 </div>
 
 <style>
@@ -130,12 +147,28 @@ const { tabs, id = `codetabs-${Math.random().toString(36).slice(2, 8)}` } = Astr
     border-bottom-color: var(--color-ink);
   }
 
-  /* Pseudo-code highlighting */
-  .tab-panel code {
-    /* Comments */
-    &::before {
-      content: none;
-    }
+  /* Caption styles */
+  .tab-captions {
+    position: relative;
+  }
+
+  .tab-caption {
+    display: none;
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    text-align: center;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+
+  /* Caption switching - match radio to caption via index */
+  .tab-radio:nth-of-type(1):checked ~ .tab-captions .tab-caption:nth-child(1),
+  .tab-radio:nth-of-type(2):checked ~ .tab-captions .tab-caption:nth-child(2),
+  .tab-radio:nth-of-type(3):checked ~ .tab-captions .tab-caption:nth-child(3),
+  .tab-radio:nth-of-type(4):checked ~ .tab-captions .tab-caption:nth-child(4),
+  .tab-radio:nth-of-type(5):checked ~ .tab-captions .tab-caption:nth-child(5) {
+    display: block;
   }
 
   @media (max-width: 640px) {

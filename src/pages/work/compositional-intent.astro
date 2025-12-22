@@ -91,7 +91,7 @@ import ComponentDemo from "../../components/ComponentDemo.astro";
     { component: "Text", props: { content: "Alert message" } },
     { component: "Button", props: { label: "Dismiss" } }
   ]
-})` },
+})`, caption: "Agent proposes a Card with Icon, Text, and Button children" },
             { label: "Validate", code: `graph.validate({
   check: "Card > Icon + Text + Button",
   rules: [
@@ -100,7 +100,7 @@ import ComponentDemo from "../../components/ComponentDemo.astro";
     { rule: "card-allows-button", result: "pass" },
     { rule: "icon-button-pairing", result: "pass" }
   ]
-})` },
+})`, caption: "Graph validates all composition rules pass" },
             { label: "Reject", code: `agent.propose({
   root: "Button",
   children: [{ component: "Button", props: { label: "Inner" } }]
@@ -110,7 +110,7 @@ graph.reject({
   rule: "no-nested-interactive",
   message: "Button cannot contain Button",
   suggestion: "Use ButtonGroup for adjacent actions"
-})` }
+})`, caption: "Invalid nested composition rejected with alternative suggestion" }
           ]}
         />
 
