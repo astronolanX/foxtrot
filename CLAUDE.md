@@ -4,10 +4,10 @@ Design systems portfolio — experimental, not traditional.
 
 > **Session Logging Required:** Before ending any session, append a summary to `.claude/sessions.md` using the template at the bottom of that file. Include session ID (fox-XXX), date, completed work, and key commits.
 
-## Status: Phase 3 Complete
+## Status: Phase 4 In Progress
 
 **Last session**: 2025-12-22
-**Last commit**: `feat: add CodeTabs component with interactive code examples`
+**Last commit**: `feat: add design token pipeline demo page`
 
 ### What's Built
 
@@ -16,6 +16,7 @@ Design systems portfolio — experimental, not traditional.
 - **Theory diagrams** (6) — Mermaid flowcharts + hand-crafted SVG with hover interactions
 - **Code examples** (11) — CSS-only tabbed code showing usage patterns per theory
 - **Case study** (1) — Onboarding Digitization with real metrics
+- **Demo** (1) — Design Token Pipeline with interactive walkthrough (WIP)
 - **Navigation loop** — Circular Next links between all project pages
 - **Design tokens** — Typography scale, color palette, spacing in `global.css`
 - **Components** — CursorGlow, Base layout, Diagram, CodeTabs
@@ -23,8 +24,8 @@ Design systems portfolio — experimental, not traditional.
 ### What's Next
 
 1. Deploy to Vercel
-2. Consider additional theories from backlog
-3. Polish diagram styling if needed after deployment review
+2. Complete Design Token Pipeline demo (connect live Figma MCP)
+3. Consider additional theories from backlog
 
 ## Theory Ideas
 
@@ -93,10 +94,13 @@ src/
 │   └── Base.astro          # Fonts, meta
 ├── pages/
 │   ├── index.astro         # Homepage with partitioned list
+│   ├── demo/
+│   │   └── design-token-pipeline.astro  # Interactive demo walkthrough
 │   └── work/
 │       ├── semantic-negotiation.astro
 │       ├── agent-credentialing.astro
 │       ├── compositional-intent.astro
+│       ├── design-token-pipeline.astro  # Case study
 │       └── onboarding-digitization.astro
 ├── styles/
 │   └── global.css          # Design tokens via @theme

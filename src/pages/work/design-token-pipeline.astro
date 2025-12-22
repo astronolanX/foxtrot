@@ -80,15 +80,12 @@ import Base from "../../layouts/Base.astro";
           </div>
           <div class="arch-features">
             <div class="arch-feature">
-              <span class="arch-feature-icon">🔍</span>
               <span class="arch-feature-label">Drift Detection</span>
             </div>
             <div class="arch-feature">
-              <span class="arch-feature-icon">⚡</span>
               <span class="arch-feature-label">Impact Analysis</span>
             </div>
             <div class="arch-feature">
-              <span class="arch-feature-icon">🔄</span>
               <span class="arch-feature-label">Style Dictionary</span>
             </div>
           </div>
@@ -144,14 +141,14 @@ Parity score: 87%</code></pre>
           <pre class="code-content"><code>TOKEN: --color-accent
 CHANGE: #e5e5e5 → #ff6b35
 
-⚠️  WCAG FAILURES (2)
+[!] WCAG FAILURES (2)
 
 src/components/Button.astro:15
 │ Text on accent background
 │ Contrast: 2.8:1 (needs 4.5:1)
 └→ Suggestion: darken accent or lighten text
 
-✓ SAFE USAGES (3)
+[ok] SAFE USAGES (3)
 • CursorGlow.astro — decorative glow
 • index.astro — border accent</code></pre>
         </div>
@@ -202,15 +199,14 @@ src/components/Button.astro:15
       <!-- Demo CTA -->
       <section class="demo-cta">
         <div class="demo-box">
-          <span class="demo-icon">🎯</span>
           <h3 class="demo-title">Interactive Demo</h3>
           <p class="demo-desc">
             Watch Claude read tokens from Figma, detect drift in this codebase,
             analyze accessibility impact, and generate a PR—all orchestrated
             through a single command.
           </p>
-          <a href="https://github.com/nolansym/foxtrot/blob/main/tokens/README.md" class="demo-link">
-            View Demo Instructions &rarr;
+          <a href="/demo/design-token-pipeline" class="demo-link">
+            Run the Demo &rarr;
           </a>
         </div>
       </section>
@@ -520,12 +516,6 @@ src/components/Button.astro:15
     border-radius: 0.5rem;
     padding: 2rem;
     text-align: center;
-  }
-
-  .demo-icon {
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 1rem;
   }
 
   .demo-title {

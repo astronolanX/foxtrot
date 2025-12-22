@@ -1,0 +1,888 @@
+---
+import Base from "../../layouts/Base.astro";
+
+// Code samples that contain curly braces (must be escaped for Astro)
+const themeCode = `@theme {
+  --colors-surface-deep: #0a0a0a;
+  --colors-accent-default: #ff6b35;
+  --spacing-section-md: 120px;
+  --typography-size-base: 20px;
+  ...
+}`;
+---
+
+<Base title="Design Token Pipeline Demo · Nolan">
+  <div class="project">
+    <!-- Grain overlay -->
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- Back link -->
+    <nav class="back">
+      <a href="/" class="back-link">← back</a>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="wip-badge">Work in Progress</div>
+      <span class="hero-tag">interactive demo</span>
+      <h1 class="hero-title">Design Token Pipeline</h1>
+      <p class="hero-meta">Figma → Code with Intelligent Analysis</p>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+      <section class="intro">
+        <p class="lead">
+          Run the full pipeline in Claude Code. Watch tokens flow from Figma
+          through drift detection, impact analysis, and PR simulation.
+        </p>
+      </section>
+
+      <section class="body">
+        <h2>Quick Start</h2>
+        <div class="callout">
+          <p>cd ~/path/to/foxtrot</p>
+          <p>claude</p>
+          <p>/design-token-demo</p>
+        </div>
+        <p>
+          No Claude Code? Run the scripts manually—each phase works standalone.
+        </p>
+
+        <h2>Prerequisites</h2>
+        <p>
+          <strong>Required:</strong> Node.js 18+, this repository cloned.<br>
+          <strong>Optional:</strong> Claude Code for orchestration, Figma MCP for live data.
+        </p>
+        <div class="callout">
+          <p>npm install</p>
+        </div>
+
+        <h2>Phase 1: Environment Check</h2>
+        <p>
+          The demo verifies your setup before running. If anything's missing,
+          you'll get clear instructions.
+        </p>
+        <pre class="terminal">Checking environment...
+
+[ok] Project directory: foxtrot
+[ok] tokens/ directory exists
+[ok] scripts/detect-drift.js
+[ok] scripts/transform-tokens.js
+[ok] scripts/analyze-impact.js
+[warn] Figma MCP not configured — using sample tokens
+
+[ok] Environment ready</pre>
+
+        <h2>Phase 2: Read Tokens</h2>
+        <p>
+          In production, this reads live from Figma via MCP. For the demo,
+          sample data simulates three token changes.
+        </p>
+        <pre class="terminal">Reading tokens from Figma...
+
+[ok] Loaded 16 tokens from figma-source.json
+
+  colors/accent-default: #ff6b35 ← CHANGED
+  spacing/section-md: 120px ← CHANGED
+  typography/size-base: 20px ← CHANGED</pre>
+
+        <div class="token-changes">
+          <div class="token-change">
+            <span class="token-name">--color-accent</span>
+            <span class="token-old">#e5e5e5</span>
+            <span class="token-arrow">→</span>
+            <span class="token-new">#ff6b35</span>
+          </div>
+          <div class="token-change">
+            <span class="token-name">--space-section-md</span>
+            <span class="token-old">88px</span>
+            <span class="token-arrow">→</span>
+            <span class="token-new">120px</span>
+          </div>
+          <div class="token-change">
+            <span class="token-name">--font-size-base</span>
+            <span class="token-old">18px</span>
+            <span class="token-arrow">→</span>
+            <span class="token-new">20px</span>
+          </div>
+        </div>
+
+        <!-- Figma Embed -->
+        <figure class="media wide">
+          <div class="figma-container">
+            <iframe
+              src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FNBUo6uMRY9zeKzP8L1wV3l%2FFoxtrot-Design-Tokens-Example%3Fnode-id%3D1-114%26t%3DQ3oIyhj7ZCPqF1il-1"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <figcaption>
+            Source Figma file ·
+            <a href="https://www.figma.com/design/NBUo6uMRY9zeKzP8L1wV3l/Foxtrot-Design-Tokens-Example" target="_blank">Open in Figma →</a>
+          </figcaption>
+        </figure>
+
+        <h2>Phase 3: Drift Detection</h2>
+        <p>
+          Before syncing, scan the codebase for hardcoded values that should
+          already be tokens. This reveals design debt that accumulates silently.
+        </p>
+        <div class="callout">
+          <p>npm run tokens:drift</p>
+        </div>
+        <pre class="terminal">DESIGN DRIFT REPORT
+
+HARDCODED VALUES FOUND: 112
+
+src/components/CursorGlow.astro:21
+│ rgba(255, 255, 255, 0.03)
+└→ Use: var(--color-glow)
+
+src/pages/index.astro:247
+│ 1.5rem
+└→ Use: var(--gutter)
+
+... (109 more)
+
+─────────────────────────────────────
+PARITY SCORE: 77%
+368 token usages found, 112 should be converted</pre>
+
+        <div class="metrics">
+          <div class="metric">
+            <span class="metric-value">77%</span>
+            <span class="metric-label">Parity Score</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">112</span>
+            <span class="metric-label">Hardcoded Values</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">368</span>
+            <span class="metric-label">Token Usages</span>
+          </div>
+        </div>
+        <p>
+          Most teams don't know their parity score. They sync tokens but never
+          measure adoption. This metric makes design debt visible and trackable.
+        </p>
+
+        <h2>Phase 4: Transform</h2>
+        <p>
+          Convert Figma tokens to CSS via Style Dictionary. The pipeline outputs
+          Tailwind CSS 4 @theme format.
+        </p>
+        <div class="callout">
+          <p>npm run tokens:transform</p>
+        </div>
+        <pre class="terminal" set:html={themeCode}></pre>
+        <p>
+          <strong>Output files:</strong> tokens/figma-source.json (raw),
+          tokens/tokens.json (W3C DTCG), tokens/generated-theme.css (Tailwind @theme)
+        </p>
+
+        <h2>Phase 5: Impact Analysis</h2>
+        <p>
+          Before applying changes, analyze what breaks. WCAG contrast checks for
+          colors, layout impact for spacing, reflow warnings for typography.
+        </p>
+        <div class="callout">
+          <p>npm run tokens:impact</p>
+        </div>
+        <pre class="terminal">IMPACT ANALYSIS
+
+TOKEN: --color-accent
+CHANGE: #e5e5e5 → #ff6b35
+
+[!] WCAG FAILURES (1)
+
+src/styles/global.css:145
+│ background usage
+│ Contrast: 2.6:1 (needs 4.5:1)
+└→ Text on this background may be hard to read
+
+[ok] SAFE USAGES (5)
+• decorative contexts only
+
+─────────────────────────────────────
+
+TOKEN: --space-section-md
+CHANGE: 5.5rem → 7.5rem (36% change)
+[ok] LAYOUT CHECK PASSED
+
+TOKEN: --font-size-base
+CHANGE: 1.125rem → 1.25rem (11% change)
+[ok] TYPOGRAPHY CHECK PASSED</pre>
+
+        <div class="warning-box">
+          <p>
+            <strong>WCAG Failure Detected:</strong> The new accent color (#ff6b35)
+            on dark background doesn't meet AA contrast. This would ship broken
+            accessibility without this analysis.
+          </p>
+        </div>
+
+        <h2>Phase 6: PR Simulation</h2>
+        <p>
+          See what an automated PR would look like: files changed, diff preview,
+          impact summary, and simulated notifications.
+        </p>
+        <div class="pr-card">
+          <div class="pr-header">
+            <span class="pr-title">PR #42: Update design tokens from Figma</span>
+          </div>
+          <div class="pr-content">
+            <p><strong>Branch:</strong> design-tokens/update-2024-12-22</p>
+            <p><strong>Files changed:</strong> 1</p>
+            <p><strong>Summary:</strong> Updated 3 tokens from Figma design system.</p>
+            <div class="pr-status">
+              <span class="status-warn">[!] 1 WCAG contrast issue</span>
+              <span class="status-ok">[ok] Layout checks passed</span>
+              <span class="status-ok">[ok] Typography checks passed</span>
+            </div>
+          </div>
+        </div>
+
+        <h2>Phase 7: Apply Changes</h2>
+        <p>
+          The final step asks for confirmation before modifying your codebase.
+          Changes are applied to global.css with inline comments.
+        </p>
+        <pre class="terminal">Changes Applied
+
+BEFORE → AFTER
+
+--color-accent:     #e5e5e5 → #ff6b35
+--space-section-md: 5.5rem  → 7.5rem
+--font-size-base:   1.125rem → 1.25rem
+
+Files modified:
+• src/styles/global.css — 3 token values changed</pre>
+        <p>
+          Run with <code>--dry-run</code> to preview changes without applying.
+        </p>
+
+        <h2>Next Steps</h2>
+        <p>
+          <strong>1. Configure Figma MCP</strong> — Connect to live Figma data
+          instead of sample files.
+          <a href="https://github.com/GLips/Figma-Context-MCP">Get Figma MCP →</a>
+        </p>
+        <p>
+          <strong>2. Fix the WCAG issue</strong> — The orange accent (#ff6b35)
+          needs a darker shade or lighter text to meet AA contrast.
+        </p>
+        <p>
+          <strong>3. Improve parity score</strong> — Run drift detection and
+          systematically replace hardcoded values. Target 95%+.
+        </p>
+        <p>
+          <strong>4. Add to CI/CD</strong> — Run drift detection on every PR.
+          Block merges below a parity threshold.
+        </p>
+
+        <h2>Troubleshooting</h2>
+        <details>
+          <summary>"figma-source.json not found"</summary>
+          <p>
+            Run <code>git checkout tokens/figma-source.json</code> to restore.
+          </p>
+        </details>
+        <details>
+          <summary>"Cannot find module 'style-dictionary'"</summary>
+          <p>
+            Run <code>npm install</code>. Style Dictionary v4+ is required.
+          </p>
+        </details>
+        <details>
+          <summary>Drift detection finds 0 issues</summary>
+          <p>
+            Either perfect adoption, or scan paths need adjustment in
+            scripts/detect-drift.js.
+          </p>
+        </details>
+      </section>
+
+      <section class="details">
+        <div class="detail">
+          <span class="detail-label">Stack</span>
+          <span class="detail-value">Style Dictionary v4, W3C DTCG, Tailwind 4</span>
+        </div>
+        <div class="detail">
+          <span class="detail-label">Scripts</span>
+          <span class="detail-value">drift, transform, impact</span>
+        </div>
+        <div class="detail">
+          <span class="detail-label">Integration</span>
+          <span class="detail-value">Claude Code, Figma MCP</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- Next project -->
+    <footer class="next">
+      <a href="/work/design-token-pipeline" class="next-link">
+        <span class="next-label">Read more</span>
+        <span class="next-title">Design Token Pipeline Case Study</span>
+      </a>
+    </footer>
+  </div>
+</Base>
+
+<style>
+  .project {
+    position: relative;
+    min-height: 100vh;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .back {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+  }
+
+  .back-link {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    transition: all 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-paper);
+    background: var(--color-ink);
+    padding: 0.2em 0.4em;
+    margin: -0.2em -0.4em;
+  }
+
+  .hero {
+    padding: 8rem 2rem 4rem;
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .wip-badge {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-paper);
+    background: var(--color-ink);
+    padding: 0.25em 0.6em;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-tag {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    display: block;
+    margin-bottom: 1rem;
+    text-transform: lowercase;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--color-ink);
+  }
+
+  .hero-meta {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .content {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .intro {
+    margin-bottom: 3rem;
+  }
+
+  .lead {
+    font-size: var(--font-size-lg);
+    line-height: 1.5;
+    color: var(--color-ink-secondary);
+  }
+
+  .body h2 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    font-weight: 400;
+    margin: 3rem 0 1rem;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    color: var(--color-ink);
+  }
+
+  .body p {
+    margin-bottom: 1rem;
+    color: var(--color-ink-secondary);
+    line-height: 1.7;
+  }
+
+  .body a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .body a:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    text-decoration: none;
+    padding: 0.1em 0.2em;
+    margin: -0.1em -0.2em;
+  }
+
+  .body code {
+    font-family: var(--font-display);
+    font-size: 0.9em;
+    background: rgba(0,0,0,0.05);
+    padding: 0.1em 0.3em;
+    border-radius: 0.2em;
+  }
+
+  .callout {
+    border-left: 2px solid var(--color-ink);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .callout p {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink);
+    font-style: normal;
+    margin: 0.5rem 0;
+  }
+
+  .callout p:first-child {
+    margin-top: 0;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Terminal output */
+  .terminal {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: 1.5rem;
+    border-radius: 0.25rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    line-height: 1.6;
+    white-space: pre;
+  }
+
+  /* Token changes */
+  .token-changes {
+    margin: 1.5rem 0;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 0.25rem;
+    overflow: hidden;
+  }
+
+  .token-change {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+  }
+
+  .token-change + .token-change {
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .token-name {
+    color: var(--color-ink);
+    flex: 1;
+  }
+
+  .token-old {
+    color: var(--color-ink-muted);
+    text-decoration: line-through;
+  }
+
+  .token-arrow {
+    color: var(--color-ink-muted);
+  }
+
+  .token-new {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  /* Metrics */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .metric {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background: var(--color-paper-warm);
+    border-radius: 0.25rem;
+  }
+
+  .metric-value {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    color: var(--color-ink);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .metric-label {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+  }
+
+  /* Warning box */
+  .warning-box {
+    background: #fef3c7;
+    border-left: 3px solid #f59e0b;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+
+  .warning-box p {
+    color: #92400e;
+    margin: 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+  }
+
+  /* PR card */
+  .pr-card {
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 0.25rem;
+    margin: 1.5rem 0;
+    overflow: hidden;
+  }
+
+  .pr-header {
+    background: var(--color-paper-warm);
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .pr-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    color: var(--color-ink);
+  }
+
+  .pr-content {
+    padding: 1rem;
+  }
+
+  .pr-content p {
+    font-size: var(--font-size-sm);
+    margin: 0.5rem 0;
+    color: var(--color-ink-secondary);
+  }
+
+  .pr-status {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .pr-status span {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+  }
+
+  .status-warn { color: #d97706; }
+  .status-ok { color: #059669; }
+
+  /* Details/accordion */
+  details {
+    margin: 0.5rem 0;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 0.25rem;
+  }
+
+  summary {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink);
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::before {
+    content: "+";
+    margin-right: 0.75rem;
+    color: var(--color-ink-muted);
+  }
+
+  details[open] summary::before {
+    content: "−";
+  }
+
+  details p {
+    padding: 0 1rem 1rem 2rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Figma embed */
+  .media {
+    margin: 3rem 0;
+  }
+
+  .media.wide {
+    margin: 3rem -2rem;
+    max-width: calc(100% + 4rem);
+  }
+
+  .figma-container {
+    background: var(--color-paper-warm);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 0.25rem;
+    overflow: hidden;
+  }
+
+  .figma-container iframe {
+    display: block;
+    width: 100%;
+    height: 400px;
+    border: none;
+  }
+
+  .media figcaption {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .media figcaption a {
+    color: var(--color-ink-muted);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .media figcaption a:hover {
+    color: var(--color-ink);
+  }
+
+  /* Details grid */
+  .details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .detail-label {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .detail-value {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink);
+  }
+
+  /* Footer */
+  .next {
+    background: var(--color-paper-warm);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding: 4rem 2rem;
+  }
+
+  .next-link {
+    display: block;
+    max-width: 48rem;
+    margin: 0 auto;
+    color: var(--color-ink);
+    transition: all 0.2s ease;
+  }
+
+  .next-link:hover {
+    opacity: 1;
+  }
+
+  .next-link:hover .next-title {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: 0.15em 0.35em;
+    margin: -0.15em -0.35em;
+  }
+
+  .next-label {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .next-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    color: var(--color-ink);
+    transition: all 0.2s ease;
+  }
+
+  .back-link:focus-visible,
+  .next-link:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 4px;
+  }
+
+  .back-link:active {
+    opacity: 0.5;
+  }
+
+  .next-link:active {
+    opacity: 0.4;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 6rem 1.5rem 3rem;
+    }
+
+    .content {
+      padding: 0 1.5rem 3rem;
+    }
+
+    .back {
+      left: 1.5rem;
+      top: 1.5rem;
+    }
+
+    .next {
+      padding: 3rem 1.5rem;
+    }
+
+    .metrics {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .back {
+      position: relative;
+      top: auto;
+      left: auto;
+      padding: 1.5rem;
+    }
+
+    .back-link {
+      padding: 0.5rem;
+      margin: -0.5rem;
+    }
+
+    .hero {
+      padding: 1rem 1.5rem 2rem;
+    }
+
+    .hero-title {
+      font-size: 1.75rem;
+    }
+
+    .content {
+      padding: 0 1.5rem 2rem;
+    }
+
+    .lead {
+      font-size: var(--font-size-base);
+    }
+
+    .details {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .media.wide {
+      margin: 2rem -1.5rem;
+      max-width: calc(100% + 3rem);
+    }
+
+    .next {
+      padding: 2rem 1.5rem;
+    }
+
+    .next-link {
+      padding: 1rem;
+      margin: -1rem;
+    }
+
+    .next-title {
+      font-size: var(--font-size-lg);
+    }
+
+    .token-change {
+      flex-wrap: wrap;
+    }
+
+    .token-name {
+      flex-basis: 100%;
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .hero-title {
+      font-size: 1.5rem;
+    }
+
+    .body h2 {
+      font-size: var(--font-size-sm);
+    }
+  }
+</style>

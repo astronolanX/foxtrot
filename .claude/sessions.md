@@ -62,6 +62,36 @@ CLAUDE.md                                  # Updated with theory backlog
 
 ---
 
+## Session: fox-002
+**Date:** 2025-12-22
+
+### Summary
+Built the Design Token Pipeline demo - an interactive walkthrough showing Figma-to-code token sync with drift detection, impact analysis, and PR simulation.
+
+### Completed
+- **Demo page** (`/demo/design-token-pipeline`) — Full walkthrough with terminal output examples, token change visualizations, metrics display, PR card mockup, and embedded Figma file
+- **Case study page** (`/work/design-token-pipeline`) — Narrative explaining the problem/solution with architecture diagram
+- **Styling consistency** — Matched demo page to newspaper theme used by theory pages
+- **WIP badge** — Added "Work in Progress" indicator to demo page
+- **Emoji removal** — Replaced all emojis with text markers (`[ok]`, `[!]`, `[warn]`)
+- **Homepage fix** — Changed work item titles from orange accent back to white with inverse hover
+
+### Files Changed
+```
+src/pages/demo/design-token-pipeline.astro  # New demo walkthrough
+src/pages/work/design-token-pipeline.astro  # Case study page
+src/pages/index.astro                       # Fixed link colors
+src/styles/global.css                       # Token updates from Figma
+tokens/figma-config.json                    # Figma file configuration
+```
+
+### Notes
+- Demo uses sample data; Figma MCP integration still pending
+- Scripts exist at `scripts/detect-drift.js`, `transform-tokens.js`, `analyze-impact.js`
+- Skill definition at `.claude/skills/design-token-demo.md`
+
+---
+
 <!--
 ## Session: fox-XXX
 **Date:** YYYY-MM-DD

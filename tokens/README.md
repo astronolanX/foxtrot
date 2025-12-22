@@ -113,6 +113,8 @@ tokens/
 
 ## Figma Setup
 
+**Demo file**: [Foxtrot Design Tokens Example](https://www.figma.com/design/NBUo6uMRY9zeKzP8L1wV3l/Foxtrot-Design-Tokens-Example)
+
 The demo expects a Figma file with Variables matching this structure:
 
 | Collection | Variable | Example Value |
