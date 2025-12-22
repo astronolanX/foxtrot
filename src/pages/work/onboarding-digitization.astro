@@ -9,7 +9,7 @@ import Base from "../../layouts/Base.astro";
 
     <!-- Back link -->
     <nav class="back">
-      <a href="/" class="back-link">← back</a>
+      <a href="/" class="back-link">&larr; back</a>
     </nav>
 
     <!-- Hero -->
@@ -23,87 +23,191 @@ import Base from "../../layouts/Base.astro";
     <main class="content">
       <section class="intro">
         <p class="lead">
-          Eliminating the paper trail that kept financial advisers from independence.
-          A platform that cut transition time from 94 days to 37—and recovered millions
-          in delayed revenue.
+          "This is personal. This is my life."
+        </p>
+        <p class="lead-sub">
+          Those words, scrawled on a yellow sticky note, changed how we approached
+          the entire project. We weren't digitizing paperwork. We were designing
+          for a moment of profound professional transformation.
         </p>
       </section>
 
-      <!-- Image placeholder -->
-      <figure class="media">
-        <div class="media-placeholder">
-          <span>platform overview</span>
-        </div>
+      <!-- Opening image -->
+      <figure class="media wide">
+        <img
+          src="/images/work/onboarding/design-principles.jpg"
+          alt="Design principles workshop wall covered in colorful sticky notes organized by experience goals"
+          loading="lazy"
+        />
+        <figcaption>Design principles emerged from dozens of conversations with advisers in transition.</figcaption>
       </figure>
 
       <section class="body">
-        <h2>The Problem</h2>
+        <h2>The Breaking Away</h2>
         <p>
-          Advisers breaking away from institutions faced a brutal obstacle: paperwork.
+          Financial advisers who built their careers at large institutions eventually
+          face a choice: stay comfortable, or strike out on their own. The ones who
+          choose independence aren't naive—they know the road is hard. What they don't
+          expect is that paperwork would be their biggest obstacle.
+        </p>
+        <p>
           The onboarding process consumed 24 weeks on average. Every form was manual.
-          Every data point re-entered across multiple systems. Compliance teams flagged
-          74% of submissions as "Not In Good Order"—sending advisers back to square one.
+          Every data point re-entered across multiple systems. Compliance teams
+          flagged 74% of submissions as "Not In Good Order"—regulatory jargon for
+          "start over."
         </p>
         <p>
-          The cost wasn't just time. Delayed transitions meant delayed revenue. Clients
-          sat in limbo. Advisers hemorrhaged trust before their new firms even launched.
-        </p>
-
-        <h2>Approach</h2>
-        <p>
-          Two months of research. Contextual inquiries with advisers mid-transition.
-          Stakeholder sessions with compliance, operations, and technology teams. We
-          mapped every handoff, every failure point, every workaround that had calcified
-          into process.
-        </p>
-        <p>
-          Three months of design. Wireframes iterated through weekly testing cycles.
-          Interactive prototypes validated with users before a line of production code
-          was written. The goal: eliminate re-entry, surface errors at input, give
-          advisers visibility into their transition status.
+          The cost wasn't just time. Delayed transitions meant delayed revenue.
+          Clients sat in limbo, wondering if they'd made a mistake trusting their
+          adviser's new venture. Advisers hemorrhaged credibility before their
+          firms even launched.
         </p>
 
         <div class="callout">
-          <p>74% rejection rate meant the system was designed to fail. We redesigned it to prevent failure.</p>
+          <p>74% rejection rate meant the system was designed to fail.</p>
         </div>
+      </section>
 
-        <h2>Constraints</h2>
+      <section class="body">
+        <h2>Understanding Roberta</h2>
         <p>
-          FINRA and SEC regulations aren't suggestions. Every field, every workflow,
-          every data retention policy had to satisfy compliance—without making the
-          interface feel like a legal document. Legacy systems lacked modern APIs;
-          integration required creative middleware. Users ranged from tech-native
-          associates to advisers who'd used paper for decades.
+          We spent two months in research before touching a wireframe. Contextual
+          inquiries with advisers mid-transition. Stakeholder sessions with compliance,
+          operations, and technology teams. We mapped every handoff, every failure
+          point, every workaround that had calcified into process.
         </p>
+        <p>
+          From this emerged Roberta—not a fictional persona, but a composite of real
+          struggles. Roberta had spent 18 years building her book of business. She
+          knew her clients' kids' names, their retirement dreams, their fears about
+          market volatility. Now she was drowning in forms that treated those
+          relationships as rows in a spreadsheet.
+        </p>
+      </section>
 
-        <h2>Outcome</h2>
+      <figure class="media">
+        <img
+          src="/images/work/onboarding/persona-roberta.jpg"
+          alt="User persona document for Roberta, a financial adviser in transition"
+          loading="lazy"
+        />
+        <figcaption>Roberta represented the human cost of a broken system.</figcaption>
+      </figure>
+
+      <section class="body">
+        <p>
+          The breakthrough came during synthesis. We covered a wall with sticky notes—
+          not features, but feelings. What should Roberta feel at each stage?
+        </p>
+        <ul class="principle-list">
+          <li><strong>"I can do this."</strong> Empowerment over overwhelm.</li>
+          <li><strong>"Schwab knows me."</strong> Anticipation over interrogation.</li>
+          <li><strong>"I didn't think about the process."</strong> Intuition over instruction.</li>
+          <li><strong>"This is personal."</strong> Acknowledgment over automation.</li>
+        </ul>
+        <p>
+          These weren't platitudes. They became design constraints. Every screen,
+          every interaction, every error message was measured against them.
+        </p>
+      </section>
+
+      <section class="body">
+        <h2>Mapping the Chaos</h2>
+        <p>
+          The existing system wasn't one system—it was a tangle of handoffs between
+          three different user types: internal consultants managing the relationship,
+          prospective advisers gathering information, and advisers actively in
+          transition moving client assets.
+        </p>
+        <p>
+          Each had different needs, different timelines, different anxiety levels.
+          The consultant needed visibility across dozens of transitions. The prospect
+          needed to understand what they were signing up for. The adviser in transition
+          needed to track hundreds of client accounts without dropping any.
+        </p>
+      </section>
+
+      <figure class="media wide">
+        <img
+          src="/images/work/onboarding/experience-flow.png"
+          alt="Experience flow diagram showing the journey from ACS Consultant through Prospect Advisor to Advisor in Transition"
+          loading="lazy"
+        />
+        <figcaption>The flow revealed why 74% of submissions failed—complexity without clarity.</figcaption>
+      </figure>
+
+      <section class="body">
+        <p>
+          Mapping this flow took weeks. We discovered that advisers were often
+          working with incomplete information, guessing at regulatory requirements,
+          and re-entering the same client data into four different systems. Errors
+          didn't surface until weeks later, when compliance finally reviewed the
+          submission.
+        </p>
+        <p>
+          The insight: stop catching errors at the end. Prevent them at the source.
+        </p>
+      </section>
+
+      <section class="body">
+        <h2>Designing Together</h2>
+        <p>
+          We ran weekly testing cycles with real advisers. Not polished prototypes—
+          paper sketches, hand-drawn wireframes, rough concepts that invited critique.
+          The goal wasn't validation. It was collaboration.
+        </p>
+      </section>
+
+      <figure class="media">
+        <img
+          src="/images/work/onboarding/wireframe-voting.jpg"
+          alt="Whiteboard covered in hand-drawn wireframes with red dot stickers indicating team votes"
+          loading="lazy"
+        />
+        <figcaption>Dot voting turned design reviews into collective decision-making.</figcaption>
+      </figure>
+
+      <section class="body">
+        <p>
+          The dashboard wireframe went through 23 iterations. Each one taught us
+          something. The progress indicators needed to show momentum, not just
+          completion. The activity log needed to surface what mattered, not just
+          what happened. The task list needed to prevent mistakes, not just track them.
+        </p>
+        <p>
+          We landed on a design that felt less like a form and more like a co-pilot.
+          The system didn't just accept input—it anticipated needs, flagged risks
+          before they became rejections, and gave advisers confidence that nothing
+          was falling through the cracks.
+        </p>
+      </section>
+
+      <figure class="media wide">
+        <img
+          src="/images/work/onboarding/advisor-dashboard.png"
+          alt="Final advisor dashboard interface showing firm status, team members, and account preparation progress"
+          loading="lazy"
+        />
+        <figcaption>The final dashboard: from chaos to clarity.</figcaption>
+      </figure>
+
+      <section class="body">
+        <h2>The Transformation</h2>
         <p>
           Not In Good Order rates dropped from 74% to 18.3%. Average transition time
           fell from 94 days to 37. The platform projected $11.2 million in recovered
           revenue and $1.35 million in operational savings within the first year.
         </p>
-        <p>
-          More than metrics: advisers reported feeling in control of their transitions
-          for the first time. Compliance teams stopped being bottlenecks and became
-          partners. The paper trail became a data stream.
-        </p>
       </section>
-
-      <!-- Image placeholder -->
-      <figure class="media wide">
-        <div class="media-placeholder">
-          <span>workflow comparison</span>
-        </div>
-      </figure>
 
       <!-- Stats -->
       <section class="stats">
         <div class="stat">
-          <span class="stat-value">74% → 18%</span>
+          <span class="stat-value">74% &rarr; 18%</span>
           <span class="stat-label">NIGO rate reduction</span>
         </div>
         <div class="stat">
-          <span class="stat-value">94 → 37</span>
+          <span class="stat-value">94 &rarr; 37</span>
           <span class="stat-label">days to transition</span>
         </div>
         <div class="stat">
@@ -112,10 +216,26 @@ import Base from "../../layouts/Base.astro";
         </div>
       </section>
 
+      <section class="body">
+        <p>
+          But the number I remember isn't in any report. It's from a call with an
+          adviser who had just completed her transition. She said: "For the first
+          time, I felt like I was in control."
+        </p>
+        <p>
+          That's what we designed for. Not efficiency—agency. Not speed—confidence.
+          Not compliance—partnership.
+        </p>
+        <p>
+          The paper trail became a data stream. And Roberta could finally focus on
+          what she did best: taking care of her clients.
+        </p>
+      </section>
+
       <section class="details">
         <div class="detail">
           <span class="detail-label">Role</span>
-          <span class="detail-value">UX Designer, Researcher, Frontend Engineer</span>
+          <span class="detail-value">Lead Designer, Researcher, Frontend Engineer</span>
         </div>
         <div class="detail">
           <span class="detail-label">Duration</span>
@@ -215,6 +335,15 @@ import Base from "../../layouts/Base.astro";
   }
 
   .lead {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    line-height: 1.3;
+    color: var(--color-ink);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  .lead-sub {
     font-size: var(--font-size-lg);
     line-height: 1.5;
     color: var(--color-ink-secondary);
@@ -230,10 +359,43 @@ import Base from "../../layouts/Base.astro";
     color: var(--color-ink);
   }
 
+  .body h2:first-child {
+    margin-top: 0;
+  }
+
   .body p {
     margin-bottom: 1rem;
     color: var(--color-ink-secondary);
     line-height: 1.7;
+  }
+
+  .body ul {
+    margin: 1.5rem 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .principle-list li {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--color-ink-secondary);
+    line-height: 1.6;
+  }
+
+  .principle-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--color-ink-muted);
+  }
+
+  .principle-list strong {
+    color: var(--color-ink);
+    font-weight: 400;
   }
 
   .callout {
@@ -255,24 +417,24 @@ import Base from "../../layouts/Base.astro";
   }
 
   .media.wide {
-    margin: 3rem -2rem;
-    max-width: calc(100% + 4rem);
+    margin: 3rem -4rem;
+    max-width: calc(100% + 8rem);
   }
 
-  .media-placeholder {
-    aspect-ratio: 16/9;
-    background: var(--color-paper-warm);
-    border: 1px solid rgba(0,0,0,0.08);
+  .media img {
+    width: 100%;
+    height: auto;
+    display: block;
     border-radius: 0.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: 1px solid rgba(0,0,0,0.08);
   }
 
-  .media-placeholder span {
+  .media figcaption {
     font-family: var(--font-display);
     font-size: var(--font-size-sm);
     color: var(--color-ink-muted);
+    margin-top: 0.75rem;
+    text-align: center;
   }
 
   .stats {
@@ -392,6 +554,11 @@ import Base from "../../layouts/Base.astro";
       grid-template-columns: 1fr;
       gap: 1.5rem;
     }
+
+    .media.wide {
+      margin: 2rem -1.5rem;
+      max-width: calc(100% + 3rem);
+    }
   }
 
   @media (max-width: 640px) {
@@ -420,6 +587,10 @@ import Base from "../../layouts/Base.astro";
     }
 
     .lead {
+      font-size: var(--font-size-lg);
+    }
+
+    .lead-sub {
       font-size: var(--font-size-base);
     }
 
