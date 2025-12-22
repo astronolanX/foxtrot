@@ -2,6 +2,8 @@
 
 Design systems portfolio — experimental, not traditional.
 
+> **Session Logging Required:** Before ending any session, append a summary to `.claude/sessions.md` using the template at the bottom of that file. Include session ID (fox-XXX), date, completed work, and key commits.
+
 ## Status: Phase 2 Complete
 
 **Last session**: 2024-12-21
