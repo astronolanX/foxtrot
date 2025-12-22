@@ -66,24 +66,42 @@ CLAUDE.md                                  # Updated with theory backlog
 **Date:** 2025-12-22
 
 ### Summary
-Built the Design Token Pipeline demo - an interactive walkthrough showing Figma-to-code token sync with drift detection, impact analysis, and PR simulation.
+Built the Design Token Pipeline demo, deployed to Vercel, and configured custom domain.
 
 ### Completed
-- **Demo page** (`/demo/design-token-pipeline`) — Full walkthrough with terminal output examples, token change visualizations, metrics display, PR card mockup, and embedded Figma file
+- **Demo page** (`/demo/design-token-pipeline`) — Full walkthrough with terminal output examples, token change visualizations, metrics display, PR card mockup, embedded Figma file
 - **Case study page** (`/work/design-token-pipeline`) — Narrative explaining the problem/solution with architecture diagram
 - **Styling consistency** — Matched demo page to newspaper theme used by theory pages
-- **WIP badge** — Added "Work in Progress" indicator to demo page
+- **WIP badges** — Added to demo page and all 3 theory pages
 - **Emoji removal** — Replaced all emojis with text markers (`[ok]`, `[!]`, `[warn]`)
-- **Homepage fix** — Changed work item titles from orange accent back to white with inverse hover
+- **Homepage fixes** — Changed work item titles and footer links from orange accent back to white with inverse hover
+- **Fragment animations** — Fixed "layers" and "depth" to animate like "craft" and "structure"
+- **Vercel deployment** — Deployed to production, connected GitHub for auto-deploys
+- **Domain config** — Pointed `astronolan.com` and `www.astronolan.com` to foxtrot
+
+### Key Commits
+- `016074b` feat: add design token pipeline demo page
+- `cdca205` fix: change footer links to white on homepage
+- `8f65c13` feat: add WIP badge to theory pages
+- `8bc7fc6` fix: match ambient fragment animation to highlight fragments
 
 ### Files Changed
 ```
 src/pages/demo/design-token-pipeline.astro  # New demo walkthrough
 src/pages/work/design-token-pipeline.astro  # Case study page
-src/pages/index.astro                       # Fixed link colors
+src/pages/work/semantic-negotiation.astro   # WIP badge
+src/pages/work/agent-credentialing.astro    # WIP badge
+src/pages/work/compositional-intent.astro   # WIP badge
+src/pages/index.astro                       # Fixed link colors + animations
 src/styles/global.css                       # Token updates from Figma
 tokens/figma-config.json                    # Figma file configuration
 ```
+
+### Infrastructure
+- Vercel project: `foxtrot`
+- Production URL: https://foxtrot-iota.vercel.app
+- Custom domains: astronolan.com, www.astronolan.com
+- GitHub integration: auto-deploy on push
 
 ### Notes
 - Demo uses sample data; Figma MCP integration still pending
