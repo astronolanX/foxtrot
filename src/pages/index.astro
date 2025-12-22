@@ -24,18 +24,17 @@ import Base from "../layouts/Base.astro";
 
       <!-- Floating fragments -->
       <div class="fragments" aria-hidden="true">
-        <span class="fragment" style="--x: 15%; --y: 20%; --delay: 0s;">systematic thinking</span>
-        <span class="fragment" style="--x: 75%; --y: 15%; --delay: 2s;">expressive design</span>
-        <span class="fragment" style="--x: 10%; --y: 70%; --delay: 4s;">constraint</span>
-        <span class="fragment" style="--x: 80%; --y: 75%; --delay: 1s;">expression</span>
-        <span class="fragment" style="--x: 50%; --y: 85%; --delay: 3s;">structure enables creativity</span>
+        <span class="fragment fragment-highlight" style="--x: 75%; --y: 18%; --delay: 0s;">craft</span>
+        <span class="fragment fragment-highlight" style="--x: 12%; --y: 72%; --delay: 2s;">structure</span>
+        <span class="fragment fragment-ambient" style="--x: 70%; --y: 55%; --delay: 1s;">layers</span>
+        <span class="fragment fragment-ambient" style="--x: 20%; --y: 28%; --delay: 3s;">depth</span>
       </div>
 
       <!-- Work list -->
       <nav class="work-list" aria-label="Projects">
         <!-- Theories -->
         <div class="work-section">
-          <span class="work-section-title">theory</span>
+          <span class="work-section-title section-highlight">theory</span>
         </div>
         <a href="/work/semantic-negotiation" class="work-item">
           <span class="work-title">Semantic Negotiation Layer</span>
@@ -49,7 +48,7 @@ import Base from "../layouts/Base.astro";
 
         <!-- Case Studies -->
         <div class="work-section">
-          <span class="work-section-title">case study</span>
+          <span class="work-section-title section-highlight">case study</span>
         </div>
         <a href="/work/onboarding-digitization" class="work-item">
           <span class="work-title">Onboarding Digitization</span>
@@ -192,10 +191,37 @@ import Base from "../layouts/Base.astro";
     animation-delay: var(--delay);
   }
 
+  /* Highlighted fragments - bold identity words */
+  .fragment-highlight {
+    background: var(--color-text-primary);
+    color: var(--color-surface-deep);
+    padding: 0.15em 0.35em;
+    animation: fadeFloatHighlight 12s ease-in-out infinite;
+    animation-delay: var(--delay);
+  }
+
+  /* Ambient fragment - ghostly, atmospheric */
+  .fragment-ambient {
+    animation: fadeFloatAmbient 16s ease-in-out infinite;
+    animation-delay: var(--delay);
+  }
+
   @keyframes fadeFloat {
     0%, 100% { opacity: 0; transform: translate(0, 0); }
     20%, 80% { opacity: 0.4; }
     50% { opacity: 0.6; transform: translate(10px, -10px); }
+  }
+
+  @keyframes fadeFloatHighlight {
+    0%, 100% { opacity: 0; transform: translate(0, 0); }
+    20%, 80% { opacity: 0.85; }
+    50% { opacity: 0.95; transform: translate(10px, -10px); }
+  }
+
+  @keyframes fadeFloatAmbient {
+    0%, 100% { opacity: 0; transform: translate(0, 0); }
+    20%, 80% { opacity: 0.25; }
+    50% { opacity: 0.35; transform: translate(8px, -8px); }
   }
 
   /* Work list */
@@ -243,6 +269,14 @@ import Base from "../layouts/Base.astro";
     opacity: 0.4;
     text-transform: lowercase;
     letter-spacing: 0.1em;
+  }
+
+  /* Highlighted section titles - strong navigation anchors */
+  .section-highlight {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 0.2em 0.5em;
+    opacity: 1;
   }
 
   /* Footer info */
@@ -294,6 +328,25 @@ import Base from "../layouts/Base.astro";
     padding-right: 0.5rem;
     margin-left: -0.5rem;
     margin-right: -0.5rem;
+  }
+
+  .work-item:hover .work-title {
+    background: var(--color-text-primary);
+    color: var(--color-surface-deep);
+    padding: 0.1em 0.3em;
+    margin: -0.1em -0.3em;
+  }
+
+  .work-item::after {
+    content: '→';
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.2s ease;
+  }
+
+  .work-item:hover::after {
+    opacity: 0.6;
+    transform: translateX(0);
   }
 
   
