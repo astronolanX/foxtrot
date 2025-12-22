@@ -17,6 +17,7 @@ import ComponentDemo from "../../components/ComponentDemo.astro";
 
     <!-- Hero -->
     <header class="hero">
+      <div class="wip-badge">Work in Progress</div>
       <span class="hero-tag">theory</span>
       <h1 class="hero-title">Semantic Negotiation Layer</h1>
       <p class="hero-meta">Design Systems Infrastructure</p>
@@ -215,6 +216,18 @@ import ComponentDemo from "../../components/ComponentDemo.astro";
     padding: 8rem 2rem 4rem;
     max-width: 48rem;
     margin: 0 auto;
+  }
+
+  .wip-badge {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-paper);
+    background: var(--color-ink);
+    padding: 0.25em 0.6em;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
   }
 
   .hero-tag {
