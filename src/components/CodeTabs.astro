@@ -1,0 +1,155 @@
+---
+interface Tab {
+  label: string;
+  code: string;
+}
+
+interface Props {
+  tabs: Tab[];
+  id?: string;
+}
+
+const { tabs, id = `codetabs-${Math.random().toString(36).slice(2, 8)}` } = Astro.props;
+---
+
+<div class="code-tabs">
+  {/* Radio inputs at root level for CSS sibling selection */}
+  {tabs.map((tab, index) => (
+    <input
+      type="radio"
+      name={id}
+      id={`${id}-${index}`}
+      class="tab-radio"
+      checked={index === 0}
+    />
+  ))}
+
+  <div class="tab-bar" role="tablist">
+    {tabs.map((tab, index) => (
+      <label
+        for={`${id}-${index}`}
+        class="tab-label"
+        role="tab"
+      >
+        {tab.label}
+      </label>
+    ))}
+  </div>
+
+  <div class="tab-panels">
+    {tabs.map((tab, index) => (
+      <div class="tab-panel" data-index={index}>
+        <pre><code>{tab.code}</code></pre>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .code-tabs {
+    margin: 2rem 0;
+  }
+
+  .tab-bar {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .tab-label {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .tab-label:hover {
+    color: var(--color-ink-secondary);
+  }
+
+  .tab-radio:focus-visible ~ .tab-bar .tab-label {
+    outline: 2px solid var(--color-ink);
+    outline-offset: -2px;
+  }
+
+  .tab-panels {
+    position: relative;
+  }
+
+  .tab-panel {
+    display: none;
+    background: var(--color-paper-warm);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: none;
+    border-radius: 0 0 0.25rem 0.25rem;
+    padding: 1.5rem;
+    overflow-x: auto;
+  }
+
+  .tab-panel pre {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    color: var(--color-ink);
+  }
+
+  .tab-panel code {
+    font-family: inherit;
+  }
+
+  /* CSS-only tab switching - radios are siblings of .tab-panels */
+  .tab-radio:nth-of-type(1):checked ~ .tab-panels .tab-panel:nth-child(1),
+  .tab-radio:nth-of-type(2):checked ~ .tab-panels .tab-panel:nth-child(2),
+  .tab-radio:nth-of-type(3):checked ~ .tab-panels .tab-panel:nth-child(3),
+  .tab-radio:nth-of-type(4):checked ~ .tab-panels .tab-panel:nth-child(4),
+  .tab-radio:nth-of-type(5):checked ~ .tab-panels .tab-panel:nth-child(5) {
+    display: block;
+  }
+
+  /* Tab label active states - match radio to label via index */
+  .tab-radio:nth-of-type(1):checked ~ .tab-bar .tab-label:nth-child(1),
+  .tab-radio:nth-of-type(2):checked ~ .tab-bar .tab-label:nth-child(2),
+  .tab-radio:nth-of-type(3):checked ~ .tab-bar .tab-label:nth-child(3),
+  .tab-radio:nth-of-type(4):checked ~ .tab-bar .tab-label:nth-child(4),
+  .tab-radio:nth-of-type(5):checked ~ .tab-bar .tab-label:nth-child(5) {
+    color: var(--color-ink);
+    border-bottom-color: var(--color-ink);
+  }
+
+  /* Pseudo-code highlighting */
+  .tab-panel code {
+    /* Comments */
+    &::before {
+      content: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .tab-label {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    .tab-panel {
+      padding: 1rem;
+    }
+
+    .tab-panel pre {
+      font-size: 0.75rem;
+    }
+  }
+</style>

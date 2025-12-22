@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import Diagram from "../../components/Diagram.astro";
+import CodeTabs from "../../components/CodeTabs.astro";
 ---
 
 <Base title="Compositional Intent Graphs · Nolan">
@@ -74,6 +75,38 @@ import Diagram from "../../components/Diagram.astro";
           before rendering. Invalid compositions fail fast with explanations.
           Unusual-but-valid combinations get flagged for human review.
         </p>
+
+        <CodeTabs
+          tabs={[
+            { label: "Propose", code: `agent.propose({
+  root: "Card",
+  children: [
+    { component: "Icon", props: { name: "warning" } },
+    { component: "Text", props: { content: "Alert message" } },
+    { component: "Button", props: { label: "Dismiss" } }
+  ]
+})` },
+            { label: "Validate", code: `graph.validate({
+  check: "Card > Icon + Text + Button",
+  rules: [
+    { rule: "card-allows-icon", result: "pass" },
+    { rule: "card-allows-text", result: "pass" },
+    { rule: "card-allows-button", result: "pass" },
+    { rule: "icon-button-pairing", result: "pass" }
+  ]
+})` },
+            { label: "Reject", code: `agent.propose({
+  root: "Button",
+  children: [{ component: "Button", props: { label: "Inner" } }]
+})
+
+graph.reject({
+  rule: "no-nested-interactive",
+  message: "Button cannot contain Button",
+  suggestion: "Use ButtonGroup for adjacent actions"
+})` }
+          ]}
+        />
 
         <h2>Why Now</h2>
         <p>

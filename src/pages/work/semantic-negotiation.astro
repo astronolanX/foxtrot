@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import Diagram from "../../components/Diagram.astro";
+import CodeTabs from "../../components/CodeTabs.astro";
 ---
 
 <Base title="Semantic Negotiation Layer · Nolan">
@@ -68,6 +69,28 @@ import Diagram from "../../components/Diagram.astro";
           The agent negotiates with the component rather than blindly overriding. Constraints
           become collaborative, not adversarial.
         </p>
+
+        <CodeTabs
+          tabs={[
+            { label: "Request", code: `agent.request({
+  component: "Button",
+  props: { label: "Submit your application for review and approval" }
+})` },
+            { label: "Constraint", code: `component.constraint({
+  violated: "label.maxLength",
+  limit: 40,
+  actual: 52,
+  rationale: "Labels over 40 chars break mobile layout"
+})` },
+            { label: "Alternatives", code: `component.alternatives([
+  { action: "truncate", result: "Submit your application..." },
+  { action: "wrap", result: "Multi-line button" },
+  { action: "split", result: "Use secondary action pattern" }
+])` },
+            { label: "Resolution", code: `agent.select("truncate")
+// Component renders with truncated label` }
+          ]}
+        />
 
         <h2>Why Now</h2>
         <p>
