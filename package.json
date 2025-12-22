@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "tokens:transform": "node scripts/transform-tokens.js",
+    "tokens:drift": "node scripts/detect-drift.js",
+    "tokens:impact": "node scripts/analyze-impact.js"
   },
   "dependencies": {
     "astro": "^5.0.0",
@@ -15,6 +18,7 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",
-    "tailwindcss": "^4.0.0"
+    "tailwindcss": "^4.0.0",
+    "style-dictionary": "^4.2.0"
   }
 }
