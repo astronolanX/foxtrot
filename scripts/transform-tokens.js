@@ -19,53 +19,37 @@ const __dirname = dirname(__filename);
 const ROOT = join(__dirname, '..');
 const TOKENS_DIR = join(ROOT, 'tokens');
 
-// Convert Figma MCP output to W3C DTCG format
-function convertToW3C(figmaTokens) {
-  const dtcg = {};
+// Convert Figma MCP output to Style Dictionary format
+function convertToStyleDictionary(figmaTokens) {
+  const tokens = {};
 
   for (const [collection, variables] of Object.entries(figmaTokens)) {
-    dtcg[collection] = {};
+    // Skip meta information
+    if (collection === '_meta') continue;
 
     for (const [name, data] of Object.entries(variables)) {
-      // Handle nested paths (e.g., "surface/deep" -> surface.deep)
+      // Handle nested paths (e.g., "surface/deep" -> color-surface-deep)
       const parts = name.split('/');
-      let current = dtcg[collection];
+      const tokenName = `${collection}-${parts.join('-')}`;
 
-      for (let i = 0; i < parts.length - 1; i++) {
-        if (!current[parts[i]]) current[parts[i]] = {};
-        current = current[parts[i]];
-      }
-
-      const finalKey = parts[parts.length - 1];
-
-      // Determine token type from value
-      let type = 'string';
       let value = data.value;
 
-      if (typeof value === 'string') {
-        if (value.startsWith('#') || value.startsWith('rgb') || value.startsWith('hsl')) {
-          type = 'color';
-        } else if (value.endsWith('px') || value.endsWith('rem') || value.endsWith('em')) {
-          type = 'dimension';
-        }
-      } else if (typeof value === 'number') {
-        type = 'number';
-        // Convert numbers to dimensions if they're spacing/sizing
-        if (name.includes('space') || name.includes('size') || name.includes('gutter')) {
+      // Convert numbers to dimensions for spacing/sizing
+      if (typeof value === 'number') {
+        if (collection === 'spacing' || collection === 'typography') {
           value = `${value}px`;
-          type = 'dimension';
         }
       }
 
-      current[finalKey] = {
-        $type: type,
-        $value: value,
-        ...(data.description && { $description: data.description }),
+      // Flatten into top-level tokens with dashes
+      tokens[tokenName] = {
+        value: value,
+        ...(data.description && { comment: data.description }),
       };
     }
   }
 
-  return dtcg;
+  return tokens;
 }
 
 // Custom format for Tailwind @theme
@@ -105,17 +89,17 @@ export async function transformTokens() {
   console.log('  1. Reading figma-source.json');
   const figmaTokens = JSON.parse(readFileSync(figmaSourcePath, 'utf-8'));
 
-  // Step 2: Convert to W3C DTCG
-  console.log('  2. Converting to W3C DTCG format');
-  const dtcgTokens = convertToW3C(figmaTokens);
-  writeFileSync(dtcgPath, JSON.stringify(dtcgTokens, null, 2));
+  // Step 2: Convert to Style Dictionary format
+  console.log('  2. Converting to Style Dictionary format');
+  const sdTokens = convertToStyleDictionary(figmaTokens);
+  writeFileSync(dtcgPath, JSON.stringify(sdTokens, null, 2));
   console.log(`     → Written to tokens/tokens.json`);
 
   // Step 3: Run Style Dictionary
   console.log('  3. Running Style Dictionary');
 
   const sd = new StyleDictionary({
-    source: [dtcgPath],
+    tokens: sdTokens,
     platforms: {
       css: {
         transformGroup: 'css',

@@ -1,0 +1,18 @@
+@theme {
+  --colors-surface-deep: #0a0a0a;
+  --colors-surface-raised: #141414;
+  --colors-surface-light: #fafafa;
+  --colors-text-primary: #f5f5f5;
+  --colors-text-secondary: #a0a0a0;
+  --colors-text-muted: #525252;
+  --colors-accent-default: #ff6b35;
+  --colors-accent-hover: #ffffff;
+  --spacing-section-sm: 55px;
+  --spacing-section-md: 120px;
+  --spacing-section-lg: 144px;
+  --spacing-gutter: 24px;
+  --typography-size-sm: 14px;
+  --typography-size-base: 20px;
+  --typography-size-lg: 22px;
+  --typography-size-xl: 28px;
+}

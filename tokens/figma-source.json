@@ -1,0 +1,78 @@
+{
+  "colors": {
+    "surface/deep": {
+      "value": "#0a0a0a",
+      "description": "Primary dark background"
+    },
+    "surface/raised": {
+      "value": "#141414",
+      "description": "Elevated surface background"
+    },
+    "surface/light": {
+      "value": "#fafafa",
+      "description": "Light mode background"
+    },
+    "text/primary": {
+      "value": "#f5f5f5",
+      "description": "Primary text color"
+    },
+    "text/secondary": {
+      "value": "#a0a0a0",
+      "description": "Secondary text color"
+    },
+    "text/muted": {
+      "value": "#525252",
+      "description": "Muted text color"
+    },
+    "accent/default": {
+      "value": "#ff6b35",
+      "description": "Primary accent color (changed for demo)"
+    },
+    "accent/hover": {
+      "value": "#ffffff",
+      "description": "Accent hover state"
+    }
+  },
+  "spacing": {
+    "section/sm": {
+      "value": 55,
+      "description": "Small section padding"
+    },
+    "section/md": {
+      "value": 120,
+      "description": "Medium section padding (changed for demo)"
+    },
+    "section/lg": {
+      "value": 144,
+      "description": "Large section padding"
+    },
+    "gutter": {
+      "value": 24,
+      "description": "Default gutter width"
+    }
+  },
+  "typography": {
+    "size/sm": {
+      "value": 14,
+      "description": "Small text size"
+    },
+    "size/base": {
+      "value": 20,
+      "description": "Base text size (changed for demo)"
+    },
+    "size/lg": {
+      "value": 22,
+      "description": "Large text size"
+    },
+    "size/xl": {
+      "value": 28,
+      "description": "Extra large text size"
+    }
+  },
+  "_meta": {
+    "source": "Figma MCP Demo File",
+    "fileId": "foxtrot-design-tokens",
+    "lastSync": "2024-12-22T10:00:00Z",
+    "note": "This file simulates MCP output. Three tokens have been changed: accent/default (#e5e5e5 → #ff6b35), section/md (88 → 120), size/base (18 → 20)"
+  }
+}
