@@ -4,25 +4,26 @@ Design systems portfolio — experimental, not traditional.
 
 > **Session Logging Required:** Before ending any session, append a summary to `.claude/sessions.md` using the template at the bottom of that file. Include session ID (fox-XXX), date, completed work, and key commits.
 
-## Status: Phase 2 Complete
+## Status: Phase 3 Complete
 
-**Last session**: 2024-12-21
-**Last commit**: `feat: add theory pages and case study with navigation loop`
+**Last session**: 2025-12-22
+**Last commit**: `feat: add Mermaid diagrams to theory pages`
 
 ### What's Built
 
 - **Homepage** (`/`) — Dark atmospheric with floating fragments, partitioned list view
 - **Theory pages** (3) — Semantic Negotiation, Agent Credentialing, Compositional Intent
+- **Theory diagrams** (6) — Mermaid flowcharts + hand-crafted SVG with hover interactions
 - **Case study** (1) — Onboarding Digitization with real metrics
 - **Navigation loop** — Circular Next links between all project pages
 - **Design tokens** — Typography scale, color palette, spacing in `global.css`
-- **Components** — CursorGlow, Base layout
+- **Components** — CursorGlow, Base layout, Diagram
 
 ### What's Next
 
-1. Add media/diagrams to theory pages (currently placeholders)
-2. Deploy to Vercel
-3. Consider additional theories from backlog
+1. Deploy to Vercel
+2. Consider additional theories from backlog
+3. Polish diagram styling if needed after deployment review
 
 ## Theory Ideas
 
