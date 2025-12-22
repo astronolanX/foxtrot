@@ -7,17 +7,18 @@ Design systems portfolio — experimental, not traditional.
 ## Status: Phase 3 Complete
 
 **Last session**: 2025-12-22
-**Last commit**: `feat: add Mermaid diagrams to theory pages`
+**Last commit**: `feat: add CodeTabs component with interactive code examples`
 
 ### What's Built
 
 - **Homepage** (`/`) — Dark atmospheric with floating fragments, partitioned list view
 - **Theory pages** (3) — Semantic Negotiation, Agent Credentialing, Compositional Intent
 - **Theory diagrams** (6) — Mermaid flowcharts + hand-crafted SVG with hover interactions
+- **Code examples** (11) — CSS-only tabbed code showing usage patterns per theory
 - **Case study** (1) — Onboarding Digitization with real metrics
 - **Navigation loop** — Circular Next links between all project pages
 - **Design tokens** — Typography scale, color palette, spacing in `global.css`
-- **Components** — CursorGlow, Base layout, Diagram
+- **Components** — CursorGlow, Base layout, Diagram, CodeTabs
 
 ### What's Next
 
