@@ -18,9 +18,7 @@ import Base from "../layouts/Base.astro";
     <main class="content">
       <!-- Central statement -->
       <div class="statement">
-        <h1 class="statement-text">
-          <span class="word" data-depth="1">Nolan</span>
-        </h1>
+        <h1 class="statement-text">nolan</h1>
         <p class="statement-sub">systems & surfaces</p>
       </div>
 
@@ -33,18 +31,34 @@ import Base from "../layouts/Base.astro";
         <span class="fragment" style="--x: 50%; --y: 85%; --delay: 3s;">structure enables creativity</span>
       </div>
 
-      <!-- Work orbs - abstract until hover -->
+      <!-- Work orbs - abstract until hover (desktop) -->
       <div class="orbs">
-        <div class="orb" data-title="Component Architecture" style="--x: 25%; --y: 45%;">
+        <a href="/work/component-architecture" class="orb" data-title="Component Architecture" style="--x: 25%; --y: 45%;">
           <span class="orb-label">01</span>
-        </div>
-        <div class="orb" data-title="Typographic Systems" style="--x: 50%; --y: 55%;">
+        </a>
+        <a href="/work/typographic-systems" class="orb" data-title="Typographic Systems" style="--x: 50%; --y: 55%;">
           <span class="orb-label">02</span>
-        </div>
-        <div class="orb" data-title="Interaction Patterns" style="--x: 75%; --y: 40%;">
+        </a>
+        <a href="/work/interaction-patterns" class="orb" data-title="Interaction Patterns" style="--x: 75%; --y: 40%;">
           <span class="orb-label">03</span>
-        </div>
+        </a>
       </div>
+
+      <!-- Mobile work list (shows when orbs hidden) -->
+      <nav class="work-list" aria-label="Projects">
+        <a href="/work/component-architecture" class="work-item">
+          <span class="work-number">01</span>
+          <span class="work-title">Component Architecture</span>
+        </a>
+        <a href="/work/typographic-systems" class="work-item">
+          <span class="work-number">02</span>
+          <span class="work-title">Typographic Systems</span>
+        </a>
+        <a href="/work/interaction-patterns" class="work-item">
+          <span class="work-number">03</span>
+          <span class="work-title">Interaction Patterns</span>
+        </a>
+      </nav>
     </main>
 
     <!-- Bottom info -->
@@ -162,15 +176,6 @@ import Base from "../layouts/Base.astro";
     text-transform: lowercase;
   }
 
-  .word {
-    display: inline-block;
-  }
-
-  @keyframes breathe {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
-  }
-
   /* Floating fragments */
   .fragments {
     position: fixed;
@@ -283,6 +288,70 @@ import Base from "../layouts/Base.astro";
     opacity: 0.2;
   }
 
+  /* Mobile work list - hidden on desktop */
+  .work-list {
+    display: none;
+  }
+
+  .work-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.2s ease;
+  }
+
+  .work-item:first-child {
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .work-number {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    opacity: 0.4;
+    min-width: 2rem;
+  }
+
+  .work-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+  }
+
+  /* Focus states */
+  .orb:focus-visible {
+    outline: 2px solid rgba(255,255,255,0.5);
+    outline-offset: 4px;
+  }
+
+  .info-link:focus-visible,
+  .work-item:focus-visible {
+    outline: 2px solid rgba(255,255,255,0.5);
+    outline-offset: 2px;
+  }
+
+  /* Active/pressed states */
+  .orb:active {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+
+  .info-link:active {
+    opacity: 0.6;
+  }
+
+  .work-item:active {
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* Hover states for work list */
+  .work-item:hover {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .work-item:hover .work-number {
+    opacity: 0.8;
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .orbs {
@@ -293,28 +362,60 @@ import Base from "../layouts/Base.astro";
       display: none;
     }
 
-    .statement-text {
+    .work-list {
+      display: block;
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 20rem;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .content {
       flex-direction: column;
-      gap: 0;
+      justify-content: center;
+      padding-bottom: 6rem;
+    }
+
+    .statement {
+      padding-top: 4rem;
+    }
+
+    .info {
+      padding: 0 1rem;
+    }
+
+    .info-link {
+      padding: 0.5rem;
+      margin: -0.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .statement-text {
+      font-size: 2rem;
+    }
+
+    .work-title {
+      font-size: var(--font-size-sm);
+    }
+
+    .info {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1rem;
     }
   }
 </style>
 
 <script>
-  // Parallax on mouse move
-  const words = document.querySelectorAll('.word[data-depth]');
+  // Parallax on mouse move (orbs only)
   const orbs = document.querySelectorAll('.orb');
 
   document.addEventListener('mousemove', (e) => {
     const x = (e.clientX / window.innerWidth - 0.5) * 2;
     const y = (e.clientY / window.innerHeight - 0.5) * 2;
-
-    words.forEach(word => {
-      const depth = parseFloat(word.getAttribute('data-depth') || '1');
-      const moveX = x * 10 * depth;
-      const moveY = y * 5 * depth;
-      (word as HTMLElement).style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
 
     orbs.forEach((orb, i) => {
       const depth = 0.5 + (i * 0.2);

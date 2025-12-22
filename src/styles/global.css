@@ -174,3 +174,55 @@ a:hover {
   background-color: var(--color-surface-deep);
   color: var(--color-surface-light);
 }
+
+/* ========================================
+   RESPONSIVE TYPOGRAPHY
+   ======================================== */
+
+@media (max-width: 768px) {
+  html {
+    font-size: 93.75%; /* 15px base */
+  }
+
+  h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-xl);
+  }
+
+  .display {
+    font-size: var(--font-size-4xl);
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 87.5%; /* 14px base */
+  }
+
+  h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-lg);
+  }
+
+  .display {
+    font-size: var(--font-size-3xl);
+  }
+
+  .lead {
+    font-size: var(--font-size-base);
+  }
+}

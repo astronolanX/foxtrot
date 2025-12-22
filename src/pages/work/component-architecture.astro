@@ -297,16 +297,104 @@ import Base from "../../layouts/Base.astro";
     color: var(--color-ink);
   }
 
+  /* Focus states */
+  .back-link:focus-visible,
+  .next-link:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 4px;
+  }
+
+  /* Active/pressed states */
+  .back-link:active {
+    opacity: 0.5;
+  }
+
+  .next-link:active {
+    opacity: 0.4;
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 6rem 1.5rem 3rem;
+    }
+
+    .content {
+      padding: 0 1.5rem 3rem;
+    }
+
+    .back {
+      left: 1.5rem;
+      top: 1.5rem;
+    }
+
+    .next {
+      padding: 3rem 1.5rem;
+    }
+  }
+
   /* Mobile */
   @media (max-width: 640px) {
+    .back {
+      position: relative;
+      top: auto;
+      left: auto;
+      padding: 1.5rem;
+    }
+
+    .back-link {
+      padding: 0.5rem;
+      margin: -0.5rem;
+    }
+
+    .hero {
+      padding: 1rem 1.5rem 2rem;
+    }
+
+    .hero-title {
+      font-size: 1.75rem;
+    }
+
+    .content {
+      padding: 0 1.5rem 2rem;
+    }
+
+    .lead {
+      font-size: var(--font-size-base);
+    }
+
     .details {
       grid-template-columns: 1fr;
       gap: 1rem;
     }
 
     .media.wide {
-      margin: 3rem -1rem;
-      max-width: calc(100% + 2rem);
+      margin: 2rem -1.5rem;
+      max-width: calc(100% + 3rem);
+    }
+
+    .next {
+      padding: 2rem 1.5rem;
+    }
+
+    .next-link {
+      padding: 1rem;
+      margin: -1rem;
+    }
+
+    .next-title {
+      font-size: var(--font-size-lg);
+    }
+  }
+
+  /* Small mobile */
+  @media (max-width: 380px) {
+    .hero-title {
+      font-size: 1.5rem;
+    }
+
+    .body h2 {
+      font-size: var(--font-size-sm);
     }
   }
 </style>
