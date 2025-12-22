@@ -1,0 +1,313 @@
+---
+/**
+ * ComponentDemo - Renders visual component examples for theory pages
+ * Displays editorial-style component demonstrations with optional captions
+ */
+
+interface Props {
+  caption?: string;
+  variant: 'button-truncation' | 'trust-badges' | 'card-composition';
+}
+
+const { caption, variant } = Astro.props;
+---
+
+<figure class="component-demo">
+  <div class="demo-container">
+    {variant === 'button-truncation' && (
+      <div class="demo-button-truncation">
+        <div class="demo-row">
+          <span class="demo-label">requested</span>
+          <button class="demo-btn demo-btn-overflow" disabled>
+            Submit your application for review and approval
+          </button>
+        </div>
+        <div class="demo-row">
+          <span class="demo-label">resolved</span>
+          <button class="demo-btn demo-btn-truncated" disabled>
+            Submit your application...
+          </button>
+        </div>
+      </div>
+    )}
+
+    {variant === 'trust-badges' && (
+      <div class="demo-trust-badges">
+        <div class="trust-badge trust-l0">
+          <span class="trust-level">L0</span>
+          <span class="trust-name">Sandbox</span>
+          <span class="trust-desc">Read-only, all outputs reviewed</span>
+        </div>
+        <div class="trust-badge trust-l1">
+          <span class="trust-level">L1</span>
+          <span class="trust-name">Trusted</span>
+          <span class="trust-desc">Safe patterns pre-approved</span>
+        </div>
+        <div class="trust-badge trust-l2">
+          <span class="trust-level">L2</span>
+          <span class="trust-name">Full Access</span>
+          <span class="trust-desc">Violations trigger demotion</span>
+        </div>
+      </div>
+    )}
+
+    {variant === 'card-composition' && (
+      <div class="demo-card-composition">
+        <div class="demo-card">
+          <div class="card-row card-row-icon">
+            <span class="card-icon">⚠</span>
+            <span class="comp-annotation">Icon</span>
+          </div>
+          <div class="card-row card-row-text">
+            <span class="card-text">Alert message</span>
+            <span class="comp-annotation">Text</span>
+          </div>
+          <div class="card-row card-row-button">
+            <button class="card-btn" disabled>Dismiss</button>
+            <span class="comp-annotation">Button</span>
+          </div>
+        </div>
+        <div class="comp-container-label">Card</div>
+      </div>
+    )}
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .component-demo {
+    margin: 2rem 0;
+  }
+
+  .demo-container {
+    background: var(--color-paper-warm);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.25rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  figcaption {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  /* Button Truncation Demo */
+  .demo-button-truncation {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .demo-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .demo-label {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    width: 5rem;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .demo-btn {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.25rem;
+    cursor: default;
+    text-align: left;
+  }
+
+  .demo-btn-overflow {
+    background: var(--color-ink);
+    opacity: 0.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 280px;
+  }
+
+  .demo-btn-truncated {
+    background: var(--color-ink);
+  }
+
+  /* Trust Badges Demo */
+  .demo-trust-badges {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .trust-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    background: var(--color-paper);
+    min-width: 140px;
+    transition: border-color 0.2s ease;
+  }
+
+  .trust-badge:hover {
+    border-color: var(--color-ink);
+  }
+
+  .trust-level {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    font-weight: 400;
+    color: var(--color-ink);
+  }
+
+  .trust-name {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink);
+    margin-top: 0.25rem;
+  }
+
+  .trust-desc {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    color: var(--color-ink-muted);
+    margin-top: 0.5rem;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .trust-l0 {
+    opacity: 0.6;
+  }
+
+  .trust-l1 {
+    opacity: 0.8;
+  }
+
+  .trust-l2 {
+    opacity: 1;
+    border-color: var(--color-ink);
+  }
+
+  /* Card Composition Demo */
+  .demo-card-composition {
+    position: relative;
+    padding: 1rem;
+  }
+
+  .demo-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: var(--color-paper);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    min-width: 200px;
+  }
+
+  .card-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .card-icon {
+    font-size: 1.25rem;
+  }
+
+  .card-text {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-secondary);
+  }
+
+  .card-btn {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-ink);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: default;
+  }
+
+  .comp-annotation {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    color: var(--color-ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.4rem;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 0.15rem;
+  }
+
+  .comp-container-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    color: var(--color-ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.4rem;
+    background: var(--color-paper-warm);
+  }
+
+  @media (max-width: 640px) {
+    .demo-container {
+      padding: 1.5rem 1rem;
+    }
+
+    .demo-trust-badges {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .trust-badge {
+      width: 100%;
+      max-width: 200px;
+    }
+
+    .demo-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .demo-label {
+      text-align: left;
+      width: auto;
+    }
+
+    .demo-btn {
+      width: 100%;
+      max-width: none;
+    }
+
+    .demo-btn-overflow {
+      max-width: 100%;
+    }
+  }
+</style>

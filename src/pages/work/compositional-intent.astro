@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import Diagram from "../../components/Diagram.astro";
 import CodeTabs from "../../components/CodeTabs.astro";
+import ComponentDemo from "../../components/ComponentDemo.astro";
 ---
 
 <Base title="Compositional Intent Graphs · Nolan">
@@ -75,6 +76,11 @@ import CodeTabs from "../../components/CodeTabs.astro";
           before rendering. Invalid compositions fail fast with explanations.
           Unusual-but-valid combinations get flagged for human review.
         </p>
+
+        <ComponentDemo
+          variant="card-composition"
+          caption="Valid composition: Card containing Icon, Text, and Button"
+        />
 
         <CodeTabs
           tabs={[

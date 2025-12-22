@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import Diagram from "../../components/Diagram.astro";
 import CodeTabs from "../../components/CodeTabs.astro";
+import ComponentDemo from "../../components/ComponentDemo.astro";
 ---
 
 <Base title="Semantic Negotiation Layer · Nolan">
@@ -69,6 +70,11 @@ import CodeTabs from "../../components/CodeTabs.astro";
           The agent negotiates with the component rather than blindly overriding. Constraints
           become collaborative, not adversarial.
         </p>
+
+        <ComponentDemo
+          variant="button-truncation"
+          caption="Constraint resolution: label truncated to fit mobile layout"
+        />
 
         <CodeTabs
           tabs={[
