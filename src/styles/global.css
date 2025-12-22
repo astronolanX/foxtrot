@@ -119,8 +119,8 @@ h4 {
   font-size: var(--font-size-sm);
 }
 
-code, pre, .mono {
-  font-family: var(--font-mono);
+code, pre {
+  font-family: var(--font-display);
 }
 
 /* ========================================
