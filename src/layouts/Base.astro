@@ -27,6 +27,30 @@ const { title, description = "Design systems portfolio" } = Astro.props;
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Mermaid -->
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+          background: '#f4f1eb',
+          primaryColor: '#f4f1eb',
+          primaryTextColor: '#1a1a1a',
+          primaryBorderColor: '#1a1a1a',
+          lineColor: '#1a1a1a',
+          secondaryColor: '#ebe6dc',
+          tertiaryColor: '#f4f1eb',
+          fontSize: '14px',
+          fontFamily: '"JetBrains Mono", ui-monospace, monospace'
+        },
+        flowchart: {
+          curve: 'linear',
+          padding: 20
+        }
+      });
+    </script>
   </head>
   <body>
     <CursorGlow />

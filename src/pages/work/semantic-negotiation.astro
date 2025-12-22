@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import Diagram from "../../components/Diagram.astro";
 ---
 
 <Base title="Semantic Negotiation Layer · Nolan">
@@ -28,12 +29,15 @@ import Base from "../../layouts/Base.astro";
         </p>
       </section>
 
-      <!-- Image placeholder -->
-      <figure class="media">
-        <div class="media-placeholder">
-          <span>negotiation flow diagram</span>
-        </div>
-      </figure>
+      <Diagram
+        caption="Agent-component negotiation flow"
+        definition={`flowchart LR
+    A[Agent] -->|request| B[Component]
+    B --> C{Valid?}
+    C -->|yes| D[Render]
+    C -->|no| E[Alternatives]
+    E -->|options| A`}
+      />
 
       <section class="body">
         <h2>The Problem</h2>
@@ -84,11 +88,33 @@ import Base from "../../layouts/Base.astro";
         </p>
       </section>
 
-      <!-- Image placeholder -->
       <figure class="media wide">
-        <div class="media-placeholder">
-          <span>constraint communication model</span>
-        </div>
+        <svg viewBox="0 0 600 240" class="constraint-model" aria-labelledby="constraint-model-title">
+          <title id="constraint-model-title">Constraint communication model layers</title>
+          <!-- Layer 3: Negotiation Interface -->
+          <g class="layer" data-layer="negotiation">
+            <rect x="50" y="160" width="500" height="60" fill="#ebe6dc" stroke="#1a1a1a" stroke-width="1"/>
+            <text x="300" y="195" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" fill="#1a1a1a">Negotiation Interface</text>
+          </g>
+          <!-- Layer 2: Constraint Rationales -->
+          <g class="layer" data-layer="constraints">
+            <rect x="50" y="85" width="500" height="60" fill="#ebe6dc" stroke="#1a1a1a" stroke-width="1"/>
+            <text x="300" y="115" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" fill="#1a1a1a">Constraint Rationales</text>
+            <text x="300" y="135" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" fill="#8a8a8a">(why limits exist)</text>
+          </g>
+          <!-- Layer 1: Component API (existing) -->
+          <g class="layer" data-layer="api">
+            <rect x="50" y="10" width="500" height="60" fill="#f4f1eb" stroke="#1a1a1a" stroke-width="1"/>
+            <text x="300" y="40" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" fill="#1a1a1a">Component API</text>
+            <text x="300" y="58" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" fill="#8a8a8a">(what exists today)</text>
+          </g>
+          <!-- Annotation arrows -->
+          <line x1="570" y1="40" x2="590" y2="40" stroke="#8a8a8a" stroke-width="1"/>
+          <text x="595" y="44" font-family="JetBrains Mono, monospace" font-size="10" fill="#8a8a8a">existing</text>
+          <line x1="570" y1="115" x2="590" y2="115" stroke="#1a1a1a" stroke-width="1"/>
+          <text x="595" y="119" font-family="JetBrains Mono, monospace" font-size="10" fill="#1a1a1a">new</text>
+        </svg>
+        <figcaption>Semantic enrichment layers on top of traditional component props</figcaption>
       </figure>
 
       <section class="details">
@@ -267,6 +293,29 @@ import Base from "../../layouts/Base.astro";
     font-family: var(--font-display);
     font-size: var(--font-size-sm);
     color: var(--color-ink-muted);
+  }
+
+  .constraint-model {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+  }
+
+  .constraint-model .layer rect {
+    transition: fill 0.2s ease, stroke-width 0.2s ease;
+  }
+
+  .constraint-model .layer:hover rect {
+    fill: var(--color-paper);
+    stroke-width: 2px;
+  }
+
+  .media figcaption {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    text-align: center;
+    margin-top: 1rem;
   }
 
   .details {

@@ -1,0 +1,89 @@
+---
+interface Props {
+  caption?: string;
+  wide?: boolean;
+  definition: string;
+}
+
+const { caption, wide = false, definition } = Astro.props;
+---
+
+<figure class:list={["diagram", { wide }]}>
+  <div class="diagram-container">
+    <pre class="mermaid" set:html={definition} />
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .diagram {
+    margin: 3rem 0;
+  }
+
+  .diagram.wide {
+    margin: 3rem -2rem;
+    max-width: calc(100% + 4rem);
+  }
+
+  .diagram-container {
+    background: var(--color-paper-warm);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.25rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+  }
+
+  .diagram-container :global(.mermaid) {
+    display: flex;
+    justify-content: center;
+  }
+
+  .diagram-container :global(svg) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Hover interactions */
+  .diagram-container :global(.node rect),
+  .diagram-container :global(.node circle),
+  .diagram-container :global(.node polygon) {
+    transition: fill 0.2s ease, stroke-width 0.2s ease;
+  }
+
+  .diagram-container :global(.node:hover rect),
+  .diagram-container :global(.node:hover circle),
+  .diagram-container :global(.node:hover polygon) {
+    fill: var(--color-paper);
+    stroke-width: 2px;
+  }
+
+  .diagram-container :global(.edgePath path) {
+    transition: stroke-width 0.2s ease;
+  }
+
+  .diagram-container :global(.edgePath:hover path) {
+    stroke-width: 2.5px;
+  }
+
+  figcaption {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .diagram.wide {
+      margin: 2rem -1.5rem;
+      max-width: calc(100% + 3rem);
+    }
+
+    .diagram-container {
+      padding: 1rem;
+    }
+  }
+</style>

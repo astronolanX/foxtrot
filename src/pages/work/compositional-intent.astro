@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import Diagram from "../../components/Diagram.astro";
 ---
 
 <Base title="Compositional Intent Graphs · Nolan">
@@ -29,12 +30,16 @@ import Base from "../../layouts/Base.astro";
         </p>
       </section>
 
-      <!-- Image placeholder -->
-      <figure class="media">
-        <div class="media-placeholder">
-          <span>intent graph visualization</span>
-        </div>
-      </figure>
+      <Diagram
+        caption="Component relationship graph with valid compositions"
+        definition={`flowchart TD
+    Card[Card]
+    Card --> Icon[Icon]
+    Card --> Text[Text]
+    Card --> Button[Button]
+    Icon -.->|valid pair| Button
+    Button -.->|invalid| Button2[Button]`}
+      />
 
       <section class="body">
         <h2>The Problem</h2>
@@ -92,12 +97,15 @@ import Base from "../../layouts/Base.astro";
         </p>
       </section>
 
-      <!-- Image placeholder -->
-      <figure class="media wide">
-        <div class="media-placeholder">
-          <span>composition validation flow</span>
-        </div>
-      </figure>
+      <Diagram
+        wide
+        caption="Runtime composition validation"
+        definition={`flowchart TD
+    Propose[Agent proposes tree] --> Validate[Graph validates]
+    Validate --> Valid{Valid?}
+    Valid -->|yes| Render[Render]
+    Valid -->|no| Error[Error + alternatives]`}
+      />
 
       <section class="details">
         <div class="detail">
