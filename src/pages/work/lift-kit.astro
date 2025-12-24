@@ -36,7 +36,7 @@ import ComponentDemo from "../../components/ComponentDemo.astro";
       <div class="stat-callout">
         <span class="stat-number">35%</span>
         <span class="stat-context">of in-house teams have considered scrapping their design system and starting over.</span>
-        <span class="stat-source">Sparkbox Design Systems Survey, 2021</span>
+        <a href="https://designsystemssurvey.sparkbox.com/2021/" target="_blank" rel="noopener" class="stat-source">Sparkbox Design Systems Survey, 2021</a>
       </div>
 
       <section class="body">
@@ -50,7 +50,7 @@ import ComponentDemo from "../../components/ComponentDemo.astro";
 
         <div class="pullquote">
           "Design systems reduce dependence on tribal knowledge."
-          <span class="pullquote-caption">— Sparkbox Design Systems Survey, 2022 (cited as a top reason for adoption)</span>
+          <span class="pullquote-caption">— <a href="https://designsystemssurvey.sparkbox.com/2022/" target="_blank" rel="noopener">Sparkbox Design Systems Survey, 2022</a> (cited as a top reason for adoption)</span>
         </div>
 
         <p>
@@ -340,17 +340,17 @@ liftkit.recommend({
           <div class="stat-item">
             <span class="stat-value">67%</span>
             <span class="stat-label">of distributed teams fail within 12 months</span>
-            <span class="stat-cite">GitLab Remote Work Report, 2024</span>
+            <a href="https://about.gitlab.com/company/culture/all-remote/guide/" target="_blank" rel="noopener" class="stat-cite">GitLab Remote Work Report, 2024</a>
           </div>
           <div class="stat-item">
             <span class="stat-value">34%</span>
             <span class="stat-label">faster task completion with an adopted design system</span>
-            <span class="stat-cite">Slack Design Systems Study</span>
+            <a href="https://slack.design/" target="_blank" rel="noopener" class="stat-cite">Slack Design Systems Study</a>
           </div>
           <div class="stat-item">
             <span class="stat-value">671%</span>
             <span class="stat-label">ROI from design systems when properly adopted</span>
-            <span class="stat-cite">Forrester Research</span>
+            <a href="https://www.forrester.com/" target="_blank" rel="noopener" class="stat-cite">Forrester Research</a>
           </div>
         </div>
 
@@ -376,8 +376,8 @@ liftkit.recommend({
           Lift Kit tells them <em>what to do</em>.
         </p>
         <p>
-          <strong>Enterprise proof points</strong> show what's possible: Salesforce's
-          Lightning Design System increased productivity by 60%. IBM's Carbon reduced
+          <strong>Enterprise proof points</strong> show what's possible: <a href="https://www.lightningdesignsystem.com/" target="_blank" rel="noopener">Salesforce's
+          Lightning Design System</a> increased productivity by 60%. <a href="https://carbondesignsystem.com/" target="_blank" rel="noopener">IBM's Carbon</a> reduced
           design costs by 75% and development costs by 66%. These gains came from
           adoption—the part that's still manual.
         </p>
@@ -567,6 +567,15 @@ liftkit.recommend({
     opacity: 0.5;
     margin-top: 1rem;
     display: block;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--color-ink-muted);
+    text-underline-offset: 2px;
+    transition: opacity 0.2s ease;
+  }
+
+  .stat-source:hover {
+    opacity: 0.8;
   }
 
   /* Pullquotes */
@@ -587,6 +596,17 @@ liftkit.recommend({
     color: var(--color-ink-muted);
     margin-top: 0.75rem;
     font-style: normal;
+  }
+
+  .pullquote-caption a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+  }
+
+  .pullquote-caption a:hover {
+    color: var(--color-ink);
   }
 
   .body h2 {
@@ -612,6 +632,17 @@ liftkit.recommend({
 
   .body em {
     font-style: italic;
+  }
+
+  .body a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: opacity 0.2s ease;
+  }
+
+  .body a:hover {
+    opacity: 0.7;
   }
 
   .callout {
@@ -673,6 +704,14 @@ liftkit.recommend({
     color: var(--color-ink-muted);
     margin-top: 0.5rem;
     display: block;
+    text-decoration: underline;
+    text-decoration-color: var(--color-ink-muted);
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+  }
+
+  .stat-cite:hover {
+    color: var(--color-ink);
   }
 
   .media {
