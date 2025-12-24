@@ -38,13 +38,13 @@ Reference for future theory content. Mix of AI-forward concepts and foundational
 | Semantic Negotiation Layer | Agent-Component Interfaces | Components explain constraints to AI, negotiate alternatives |
 | Agent Credentialing System | Trust & Governance | Graduated permissions based on demonstrated competence |
 | Compositional Intent Graphs | Component Relationships | Graph-based model of valid component compositions |
+| Lift Kit | Design Systems Adoption | Agent skill helping teams adopt style streams |
 
 ### Backlog: Tooling & Adoption
 
 Practical tools for design system governance and product team enablement:
 
 - **Component Telemetry Dashboard** — Components report usage data back to design systems team
-- **Lift Kit** — Agent skill that helps product teams adopt design system style streams
 - **Content Scanner** — Recommends changes to align with design system rules
 
 ### Backlog: AI-Forward

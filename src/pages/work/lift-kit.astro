@@ -1,0 +1,946 @@
+---
+import Base from "../../layouts/Base.astro";
+import Diagram from "../../components/Diagram.astro";
+import CodeTabs from "../../components/CodeTabs.astro";
+import ComponentDemo from "../../components/ComponentDemo.astro";
+---
+
+<Base title="Lift Kit · Nolan">
+  <div class="project">
+    <!-- Grain overlay -->
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- Back link -->
+    <nav class="back">
+      <a href="/" class="back-link">← back</a>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="wip-badge">Work in Progress</div>
+      <span class="hero-tag">theory</span>
+      <h1 class="hero-title">Lift Kit</h1>
+      <p class="hero-meta">Design Systems Adoption</p>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+      <section class="intro">
+        <p class="lead">
+          What if product teams could subscribe to curated slices of a design
+          system—and an agent helped them stay in sync as both sides evolved?
+        </p>
+      </section>
+
+      <!-- Big stat callout -->
+      <div class="stat-callout">
+        <span class="stat-number">35%</span>
+        <span class="stat-context">of in-house teams have considered scrapping their design system and starting over.</span>
+        <span class="stat-source">Sparkbox Design Systems Survey, 2021</span>
+      </div>
+
+      <section class="body">
+        <h2>The Problem</h2>
+        <p>
+          Design systems promise consistency, but adoption remains manual. Product
+          teams read docs, copy patterns, and hope they're using tokens correctly.
+          When the system updates, they learn about breaking changes through broken
+          builds—or worse, surprised designers.
+        </p>
+
+        <div class="pullquote">
+          "Design systems reduce dependence on tribal knowledge."
+          <span class="pullquote-caption">— Sparkbox Design Systems Survey, 2022 (cited as a top reason for adoption)</span>
+        </div>
+
+        <p>
+          The design systems team can't scale. Every consuming team needs hand-holding:
+          which tokens for our admin dashboard? Is this component right for our use case?
+          What happens if we upgrade? Tribal knowledge fills the gaps, but tribal knowledge
+          doesn't survive distributed teams.
+        </p>
+        <p>
+          The result: <strong>drift</strong>. Teams make local modifications. Forks proliferate.
+          The system fragments into islands of partial compliance. In Sparkbox's annual
+          survey, adoption has been the #1 challenge every year since 2018. And 42% of
+          in-house teams report that their design system created technical debt rather
+          than reducing it.
+        </p>
+
+        <h2>The Proposal</h2>
+        <p>
+          Two concepts, working together:
+        </p>
+        <p>
+          <strong>Style streams</strong>: curated, versioned slices of the design
+          system tailored for specific contexts. A "marketing stream" optimized for
+          landing pages. A "product stream" for dense data interfaces. An "admin stream"
+          for internal tools. Teams subscribe to the stream that fits—not the entire system.
+        </p>
+        <p>
+          <strong>Lift Kit</strong>: an agent skill that helps product teams adopt
+          and maintain alignment with their chosen stream. Not a linter. Not a bot.
+          A collaborative assistant that speaks to PMs, designers, and engineers
+          in their own terms.
+        </p>
+
+        <div class="callout">
+          <p>PM: "What happens if we upgrade to stream v2.3?"</p>
+          <p>Lift Kit: "Three components affected. Button padding increases by 4px—your
+          CTAs will be slightly larger. One breaking change: Card no longer supports
+          nested Cards. I found 2 instances in your checkout flow. Want me to show you?"</p>
+        </div>
+
+        <ComponentDemo
+          variant="stream-selector"
+          caption="Try it: Select your context, get a stream recommendation"
+        />
+
+        <h2>The Evolution</h2>
+        <p>
+          Design systems have evolved through three eras. We're entering the fourth.
+        </p>
+      </section>
+
+      <!-- Evolution Timeline SVG -->
+      <figure class="media wide">
+        <svg viewBox="0 0 800 280" class="evolution-timeline" aria-labelledby="evolution-title">
+          <title id="evolution-title">Design system evolution: from static docs to agent-assisted streams</title>
+
+          <!-- Timeline base -->
+          <line x1="50" y1="140" x2="750" y2="140" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="4 4" class="timeline-base"/>
+
+          <!-- Era 1: Static Docs -->
+          <g class="era" data-era="1">
+            <circle cx="120" cy="140" r="50" fill="#ebe6dc" stroke="#1a1a1a" stroke-width="1" class="era-circle"/>
+            <text x="120" y="135" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="500">Static</text>
+            <text x="120" y="150" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="500">Docs</text>
+            <text x="120" y="210" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#8a8a8a">2015</text>
+            <text x="120" y="225" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#8a8a8a">Read-only reference</text>
+          </g>
+
+          <!-- Connector 1 -->
+          <path d="M 175 140 C 210 140, 210 140, 245 140" stroke="#1a1a1a" stroke-width="1" fill="none" class="connector" marker-end="url(#arrow)"/>
+
+          <!-- Era 2: Tokens -->
+          <g class="era" data-era="2">
+            <circle cx="300" cy="140" r="50" fill="#ebe6dc" stroke="#1a1a1a" stroke-width="1" class="era-circle"/>
+            <text x="300" y="135" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="500">Design</text>
+            <text x="300" y="150" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="500">Tokens</text>
+            <text x="300" y="210" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#8a8a8a">2019</text>
+            <text x="300" y="225" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#8a8a8a">Machine-readable</text>
+          </g>
+
+          <!-- Connector 2 -->
+          <path d="M 355 140 C 390 140, 390 140, 425 140" stroke="#1a1a1a" stroke-width="1" fill="none" class="connector" marker-end="url(#arrow)"/>
+
+          <!-- Era 3: Streams -->
+          <g class="era" data-era="3">
+            <circle cx="480" cy="140" r="50" fill="#f4f1eb" stroke="#1a1a1a" stroke-width="2" class="era-circle era-current"/>
+            <text x="480" y="135" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="500">Style</text>
+            <text x="480" y="150" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="500">Streams</text>
+            <text x="480" y="210" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#1a1a1a">2024</text>
+            <text x="480" y="225" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#1a1a1a">Versioned + contextual</text>
+            <circle cx="480" cy="140" r="58" fill="none" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3 3" class="pulse-ring"/>
+          </g>
+
+          <!-- Connector 3 -->
+          <path d="M 535 140 C 570 140, 570 140, 605 140" stroke="#1a1a1a" stroke-width="1" fill="none" class="connector" marker-end="url(#arrow)"/>
+
+          <!-- Era 4: Agent-Assisted -->
+          <g class="era" data-era="4">
+            <rect x="620" y="100" width="120" height="80" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="1" rx="4" class="era-rect"/>
+            <text x="680" y="135" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#f4f1eb" font-weight="500">Agent</text>
+            <text x="680" y="150" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#f4f1eb" font-weight="500">Assisted</text>
+            <text x="680" y="210" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#1a1a1a">now</text>
+            <text x="680" y="225" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#1a1a1a">Lift Kit enables this</text>
+          </g>
+
+          <!-- Arrow marker -->
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#1a1a1a"/>
+            </marker>
+          </defs>
+        </svg>
+        <figcaption>Four eras of design system infrastructure</figcaption>
+      </figure>
+
+      <section class="body">
+        <h2>The Lifecycle</h2>
+        <p>
+          Lift Kit operates across four stages. Each stage answers a question the team is already asking.
+        </p>
+      </section>
+
+      <!-- Animated Lifecycle SVG -->
+      <figure class="media wide">
+        <svg viewBox="0 0 700 200" class="lifecycle-animated" aria-labelledby="lifecycle-title">
+          <title id="lifecycle-title">Lift Kit adoption lifecycle: Select, Migrate, Sync, Preview</title>
+
+          <!-- Select -->
+          <g class="phase" data-phase="1">
+            <circle cx="100" cy="80" r="45" fill="#ebe6dc" stroke="#1a1a1a" stroke-width="1.5" class="phase-circle"/>
+            <text x="100" y="75" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#1a1a1a" font-weight="500">Select</text>
+            <text x="100" y="92" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#8a8a8a">"Which stream?"</text>
+            <text x="100" y="150" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#4a4a4a" class="phase-desc">Recommends stream</text>
+            <text x="100" y="165" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#4a4a4a" class="phase-desc">based on use case</text>
+          </g>
+
+          <!-- Arrow 1 -->
+          <path d="M 155 80 L 195 80" stroke="#1a1a1a" stroke-width="1.5" fill="none" class="phase-arrow" marker-end="url(#lifecycle-arrow)"/>
+
+          <!-- Migrate -->
+          <g class="phase" data-phase="2">
+            <circle cx="250" cy="80" r="45" fill="#ebe6dc" stroke="#1a1a1a" stroke-width="1.5" class="phase-circle"/>
+            <text x="250" y="75" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#1a1a1a" font-weight="500">Migrate</text>
+            <text x="250" y="92" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#8a8a8a">"What changes?"</text>
+            <text x="250" y="150" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#4a4a4a" class="phase-desc">Maps current code</text>
+            <text x="250" y="165" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#4a4a4a" class="phase-desc">to stream tokens</text>
+          </g>
+
+          <!-- Arrow 2 -->
+          <path d="M 305 80 L 345 80" stroke="#1a1a1a" stroke-width="1.5" fill="none" class="phase-arrow" marker-end="url(#lifecycle-arrow)"/>
+
+          <!-- Sync -->
+          <g class="phase" data-phase="3">
+            <circle cx="400" cy="80" r="45" fill="#ebe6dc" stroke="#1a1a1a" stroke-width="1.5" class="phase-circle"/>
+            <text x="400" y="75" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#1a1a1a" font-weight="500">Sync</text>
+            <text x="400" y="92" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#8a8a8a">"Are we aligned?"</text>
+            <text x="400" y="150" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#4a4a4a" class="phase-desc">Monitors drift</text>
+            <text x="400" y="165" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#4a4a4a" class="phase-desc">continuously</text>
+          </g>
+
+          <!-- Arrow 3 -->
+          <path d="M 455 80 L 495 80" stroke="#1a1a1a" stroke-width="1.5" fill="none" class="phase-arrow" marker-end="url(#lifecycle-arrow)"/>
+
+          <!-- Preview -->
+          <g class="phase" data-phase="4">
+            <circle cx="550" cy="80" r="45" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="1.5" class="phase-circle phase-active"/>
+            <text x="550" y="75" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#f4f1eb" font-weight="500">Preview</text>
+            <text x="550" y="92" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#a0a0a0">"What breaks?"</text>
+            <text x="550" y="150" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#4a4a4a" class="phase-desc">Impact analysis</text>
+            <text x="550" y="165" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#4a4a4a" class="phase-desc">before upgrade</text>
+          </g>
+
+          <!-- Feedback loop -->
+          <path d="M 595 80 C 640 80, 660 30, 620 20 C 580 10, 540 10, 500 20 C 460 30, 420 30, 380 20 C 340 10, 300 10, 260 20 C 220 30, 180 30, 140 20 C 100 10, 60 40, 55 80"
+                stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 4" fill="none" class="feedback-loop" marker-end="url(#lifecycle-arrow)"/>
+          <text x="350" y="12" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="8" fill="#8a8a8a">continuous alignment</text>
+
+          <defs>
+            <marker id="lifecycle-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#1a1a1a"/>
+            </marker>
+          </defs>
+        </svg>
+        <figcaption>The adoption loop: selection, migration, ongoing sync, and upgrade preview</figcaption>
+      </figure>
+
+      <section class="body">
+        <CodeTabs
+          tabs={[
+            { label: "Select", code: `team.ask("We're building an internal admin tool")
+
+liftkit.recommend({
+  stream: "admin-v2",
+  confidence: 0.92,
+  rationale: "Dense data patterns, form-heavy layouts, internal tooling precedent",
+  alternatives: ["product-v3", "custom"],
+  next: "Run 'liftkit migrate --preview' to see what changes"
+})`, caption: "Agent analyzes the use case and recommends the best-fit stream" },
+            { label: "Migrate", code: `liftkit.analyze({ codebase: "./src", targetStream: "admin-v2" })
+
+{
+  tokensToReplace: 47,
+  componentsToSwap: 12,
+  breakingChanges: 0,
+  estimatedEffort: "2-3 days",
+  automatable: "89%",
+  manualReview: [
+    "src/components/DataTable.tsx — custom sort implementation",
+    "src/pages/Settings.tsx — non-standard spacing"
+  ]
+}`, caption: "Detailed migration analysis with effort estimates and manual review items" },
+            { label: "Sync", code: `liftkit.status()
+
+{
+  stream: "admin-v2.1",
+  alignment: 0.94,
+  lastSync: "2 hours ago",
+  drift: [
+    { file: "DataTable.tsx:47", issue: "custom padding override" },
+    { file: "Modal.tsx:23", issue: "hardcoded color #333333" }
+  ],
+  recommendation: "2 issues auto-fixable. Run: npx liftkit fix"
+}`, caption: "Real-time alignment monitoring with specific file locations" },
+            { label: "Preview", code: `liftkit.preview({ upgrade: "admin-v2.2" })
+
+{
+  breaking: [{
+    component: "Card",
+    change: "Nested Cards no longer supported",
+    affected: ["checkout/Summary.tsx", "checkout/Items.tsx"],
+    migration: "Use CardStack pattern instead"
+  }],
+  nonBreaking: [
+    { token: "spacing.md", change: "16px → 20px", affected: 23 }
+  ],
+  recommendation: "Review Card usage before upgrading. 2 files require changes."
+}`, caption: "Impact preview before committing to an upgrade" }
+          ]}
+        />
+
+        <h2>The Unified Dashboard</h2>
+        <p>
+          One interface for the whole product team. PMs see timeline impact. Designers
+          see visual diffs. Engineers see migration commands. Same data, different lenses.
+        </p>
+      </section>
+
+      <!-- Dashboard Demo -->
+      <ComponentDemo
+        variant="drift-detector"
+        caption="Live drift detection with actionable fixes"
+      />
+
+      <section class="body">
+        <div class="pullquote">
+          "The best design system is the one teams actually use."
+          <span class="pullquote-caption">— Lift Kit makes that possible</span>
+        </div>
+
+        <h2>Why Now</h2>
+        <p>
+          Three forces converging make Lift Kit possible—and necessary:
+        </p>
+        <p>
+          <strong>AI agents can reason about code.</strong> Before LLMs, contextual
+          understanding at this level wasn't feasible. An agent couldn't "read" a
+          codebase, understand why certain patterns were used, and explain what would
+          break if something changed. Now it can.
+        </p>
+        <p>
+          <strong>Design systems have matured.</strong> Token-based architectures
+          are standard. The substrate exists for versioned streams—semantic layers
+          on top of atomic decisions. Systems like Style Dictionary, Figma Tokens,
+          and Specify laid the groundwork.
+        </p>
+        <p>
+          <strong>Product teams are distributed.</strong> Remote and async work is
+          the norm. Buffer found that 52% of remote workers struggle with collaboration
+          daily. The person who knows "how we use the system here" might be in
+          a different timezone, on PTO, or no longer at the company. When developers
+          wait 24+ hours for answers, productivity drops 80%. Teams need an
+          always-available assistant that retains institutional context.
+        </p>
+
+        <!-- Why Now Stats -->
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-value">67%</span>
+            <span class="stat-label">of distributed teams fail within 12 months</span>
+            <span class="stat-cite">GitLab Remote Work Report, 2024</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">34%</span>
+            <span class="stat-label">faster task completion with an adopted design system</span>
+            <span class="stat-cite">Slack Design Systems Study</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">671%</span>
+            <span class="stat-label">ROI from design systems when properly adopted</span>
+            <span class="stat-cite">Forrester Research</span>
+          </div>
+        </div>
+
+        <h2>Prior Art</h2>
+        <p>
+          <strong>Package managers</strong> pioneered versioned dependency streams.
+          npm, pip, and cargo taught us: explicit versioning with clear upgrade paths
+          beats "just use latest." Lift Kit applies this to design tokens.
+        </p>
+        <p>
+          <strong>Feature flags</strong> showed that gradual rollouts reduce risk.
+          LaunchDarkly and Split.io proved staged adoption beats big-bang releases.
+          Streams enable the same pattern for design decisions.
+        </p>
+        <p>
+          <strong>Dependabot and Renovate</strong> demonstrated that automated
+          upgrade analysis works at scale. Teams trust agents to surface breaking
+          changes before they merge. Lift Kit extends this trust to visual systems.
+        </p>
+        <p>
+          <strong>Design system platforms</strong>—Figma, Storybook, zeroheight—built
+          the foundation but stopped at documentation. They tell teams what exists.
+          Lift Kit tells them <em>what to do</em>.
+        </p>
+        <p>
+          <strong>Enterprise proof points</strong> show what's possible: Salesforce's
+          Lightning Design System increased productivity by 60%. IBM's Carbon reduced
+          design costs by 75% and development costs by 66%. These gains came from
+          adoption—the part that's still manual.
+        </p>
+      </section>
+
+      <!-- Feedback loop diagram -->
+      <Diagram
+        wide
+        caption="The alignment loop: streams flow to teams, teams report back, systems evolve"
+        definition={`flowchart LR
+    subgraph DS["Design System"]
+        S[Streams]
+        V[Versions]
+    end
+    subgraph LK["Lift Kit"]
+        A[Analyze]
+        R[Recommend]
+        M[Monitor]
+    end
+    subgraph Team["Product Team"]
+        C[Codebase]
+        D[Dashboard]
+    end
+    S --> A
+    V --> A
+    A --> R
+    R --> D
+    C --> M
+    M --> D
+    D --> C`}
+      />
+
+      <section class="details">
+        <div class="detail">
+          <span class="detail-label">Domain</span>
+          <span class="detail-value">Design Systems Adoption</span>
+        </div>
+        <div class="detail">
+          <span class="detail-label">Status</span>
+          <span class="detail-value">Theoretical Proposal</span>
+        </div>
+        <div class="detail">
+          <span class="detail-label">Dependencies</span>
+          <span class="detail-value">Token Architecture, MCP, LLM Reasoning</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- Next project -->
+    <footer class="next">
+      <a href="/work/semantic-negotiation" class="next-link">
+        <span class="next-label">Next</span>
+        <span class="next-title">Semantic Negotiation Layer</span>
+      </a>
+    </footer>
+  </div>
+</Base>
+
+<style>
+  .project {
+    position: relative;
+    min-height: 100vh;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .back {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+  }
+
+  .back-link {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-paper);
+    background: var(--color-ink);
+    padding: 0.2em 0.4em;
+    margin: -0.2em -0.4em;
+  }
+
+  .hero {
+    padding: 8rem 2rem 4rem;
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .wip-badge {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: 0.25em 0.75em;
+    margin-bottom: 1rem;
+  }
+
+  .hero-tag {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    display: block;
+    margin-bottom: 1rem;
+    text-transform: lowercase;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--color-ink);
+  }
+
+  .hero-meta {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .content {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .intro {
+    margin-bottom: 3rem;
+  }
+
+  .lead {
+    font-size: var(--font-size-lg);
+    line-height: 1.5;
+    color: var(--color-ink-secondary);
+  }
+
+  /* Stat Callout - Big Impact Number */
+  .stat-callout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin: 2rem 0 3rem;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border-radius: 0.25rem;
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 5rem);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-context {
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    max-width: 32rem;
+    opacity: 0.85;
+  }
+
+  .stat-source {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    opacity: 0.5;
+    margin-top: 1rem;
+    display: block;
+  }
+
+  /* Pullquotes */
+  .pullquote {
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    color: var(--color-ink);
+    border-left: 3px solid var(--color-ink);
+    padding: 1.5rem 0 1.5rem 2rem;
+    margin: 2.5rem 0;
+    position: relative;
+  }
+
+  .pullquote-caption {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    margin-top: 0.75rem;
+    font-style: normal;
+  }
+
+  .body h2 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    font-weight: 400;
+    margin: 3rem 0 1rem;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    color: var(--color-ink);
+  }
+
+  .body p {
+    margin-bottom: 1rem;
+    color: var(--color-ink-secondary);
+    line-height: 1.7;
+  }
+
+  .body strong {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .body em {
+    font-style: italic;
+  }
+
+  .callout {
+    border-left: 2px solid var(--color-ink);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .callout p {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink);
+    font-style: normal;
+    margin: 0.5rem 0;
+  }
+
+  .callout p:first-child {
+    margin-top: 0;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: var(--color-paper-warm);
+    border-radius: 0.25rem;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: 400;
+    color: var(--color-ink);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-secondary);
+    line-height: 1.4;
+  }
+
+  .stat-cite {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    color: var(--color-ink-muted);
+    margin-top: 0.5rem;
+    display: block;
+  }
+
+  .media {
+    margin: 3rem 0;
+  }
+
+  .media.wide {
+    margin: 3rem -2rem;
+    max-width: calc(100% + 4rem);
+  }
+
+  .media svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .media figcaption {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  /* Evolution Timeline Animations */
+  .evolution-timeline .era-circle,
+  .evolution-timeline .era-rect {
+    transition: all 0.3s ease;
+  }
+
+  .evolution-timeline .era:hover .era-circle {
+    fill: var(--color-paper);
+    stroke-width: 2.5px;
+    transform: scale(1.05);
+    transform-origin: center;
+  }
+
+  .evolution-timeline .era:hover .era-rect {
+    fill: #333;
+  }
+
+  .evolution-timeline .pulse-ring {
+    animation: pulse-expand 3s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  @keyframes pulse-expand {
+    0%, 100% {
+      opacity: 0.3;
+      r: 58;
+    }
+    50% {
+      opacity: 0.6;
+      r: 62;
+    }
+  }
+
+  /* Lifecycle Animations */
+  .lifecycle-animated .phase-circle {
+    transition: all 0.3s ease;
+  }
+
+  .lifecycle-animated .phase:hover .phase-circle {
+    fill: var(--color-paper);
+    stroke-width: 2.5px;
+  }
+
+  .lifecycle-animated .phase-active {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 0 rgba(0,0,0,0));
+    }
+    50% {
+      filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
+    }
+  }
+
+  .lifecycle-animated .feedback-loop {
+    stroke-dashoffset: 0;
+    animation: dash 20s linear infinite;
+  }
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -100;
+    }
+  }
+
+  .details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .detail-label {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .detail-value {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink);
+  }
+
+  .next {
+    background: var(--color-paper-warm);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding: 4rem 2rem;
+  }
+
+  .next-link {
+    display: block;
+    max-width: 48rem;
+    margin: 0 auto;
+    color: var(--color-ink);
+    transition: all 0.2s ease;
+  }
+
+  .next-link:hover {
+    opacity: 1;
+  }
+
+  .next-link:hover .next-title {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: 0.15em 0.35em;
+    margin: -0.15em -0.35em;
+  }
+
+  .next-label {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .next-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    color: var(--color-ink);
+    transition: all 0.2s ease;
+  }
+
+  .back-link:focus-visible,
+  .next-link:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 4px;
+  }
+
+  .back-link:active {
+    opacity: 0.5;
+  }
+
+  .next-link:active {
+    opacity: 0.4;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 6rem 1.5rem 3rem;
+    }
+
+    .content {
+      padding: 0 1.5rem 3rem;
+    }
+
+    .back {
+      left: 1.5rem;
+      top: 1.5rem;
+    }
+
+    .next {
+      padding: 3rem 1.5rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .back {
+      position: relative;
+      top: auto;
+      left: auto;
+      padding: 1.5rem;
+    }
+
+    .back-link {
+      padding: 0.5rem;
+      margin: -0.5rem;
+    }
+
+    .hero {
+      padding: 1rem 1.5rem 2rem;
+    }
+
+    .hero-title {
+      font-size: 1.75rem;
+    }
+
+    .content {
+      padding: 0 1.5rem 2rem;
+    }
+
+    .lead {
+      font-size: var(--font-size-base);
+    }
+
+    .stat-callout {
+      padding: 2rem 1.5rem;
+      margin: 1.5rem -1.5rem;
+      border-radius: 0;
+    }
+
+    .pullquote {
+      padding-left: 1.5rem;
+      font-size: var(--font-size-base);
+    }
+
+    .details {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .media.wide {
+      margin: 2rem -1.5rem;
+      max-width: calc(100% + 3rem);
+    }
+
+    .next {
+      padding: 2rem 1.5rem;
+    }
+
+    .next-link {
+      padding: 1rem;
+      margin: -1rem;
+    }
+
+    .next-title {
+      font-size: var(--font-size-lg);
+    }
+  }
+
+  @media (max-width: 380px) {
+    .hero-title {
+      font-size: 1.5rem;
+    }
+
+    .body h2 {
+      font-size: var(--font-size-sm);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+    }
+  }
+</style>

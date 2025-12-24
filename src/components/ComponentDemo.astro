@@ -6,7 +6,7 @@
 
 interface Props {
   caption?: string;
-  variant: 'button-truncation' | 'trust-badges' | 'card-composition';
+  variant: 'button-truncation' | 'trust-badges' | 'card-composition' | 'stream-selector' | 'drift-detector';
 }
 
 const { caption, variant } = Astro.props;
@@ -68,6 +68,104 @@ const { caption, variant } = Astro.props;
           </div>
         </div>
         <div class="comp-container-label">Card</div>
+      </div>
+    )}
+
+    {variant === 'stream-selector' && (
+      <div class="demo-stream-selector">
+        <div class="selector-question">What are you building?</div>
+        <div class="selector-options">
+          <input type="radio" name="stream-q1" id="stream-marketing" class="selector-radio" />
+          <label for="stream-marketing" class="selector-option" data-stream="marketing">
+            <span class="option-icon">M</span>
+            <span class="option-text">Marketing pages</span>
+          </label>
+          <input type="radio" name="stream-q1" id="stream-product" class="selector-radio" />
+          <label for="stream-product" class="selector-option" data-stream="product">
+            <span class="option-icon">P</span>
+            <span class="option-text">Product interfaces</span>
+          </label>
+          <input type="radio" name="stream-q1" id="stream-admin" class="selector-radio" />
+          <label for="stream-admin" class="selector-option" data-stream="admin">
+            <span class="option-icon">A</span>
+            <span class="option-text">Internal tools</span>
+          </label>
+        </div>
+        <div class="selector-results">
+          <div class="result-card result-marketing">
+            <div class="result-header">
+              <span class="result-stream">marketing-v2</span>
+              <span class="result-match">94% match</span>
+            </div>
+            <div class="result-traits">Hero sections, CTAs, testimonials, landing patterns</div>
+          </div>
+          <div class="result-card result-product">
+            <div class="result-header">
+              <span class="result-stream">product-v3</span>
+              <span class="result-match">91% match</span>
+            </div>
+            <div class="result-traits">Data tables, forms, navigation, dense layouts</div>
+          </div>
+          <div class="result-card result-admin">
+            <div class="result-header">
+              <span class="result-stream">admin-v2</span>
+              <span class="result-match">97% match</span>
+            </div>
+            <div class="result-traits">CRUD interfaces, settings, user management</div>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {variant === 'drift-detector' && (
+      <div class="demo-drift-detector">
+        <div class="drift-header">
+          <span class="drift-stream">admin-v2.1</span>
+          <span class="drift-status">Monitoring</span>
+        </div>
+        <div class="drift-bars">
+          <div class="drift-category">
+            <span class="drift-label">Typography</span>
+            <div class="drift-bar">
+              <div class="drift-fill drift-fill-100" style="--width: 100%"></div>
+            </div>
+            <span class="drift-value">100%</span>
+          </div>
+          <div class="drift-category">
+            <span class="drift-label">Spacing</span>
+            <div class="drift-bar">
+              <div class="drift-fill drift-fill-94" style="--width: 94%"></div>
+            </div>
+            <span class="drift-value">94%</span>
+          </div>
+          <div class="drift-category">
+            <span class="drift-label">Colors</span>
+            <div class="drift-bar">
+              <div class="drift-fill drift-fill-87" style="--width: 87%"></div>
+            </div>
+            <span class="drift-value drift-warning">87%</span>
+          </div>
+          <div class="drift-category">
+            <span class="drift-label">Components</span>
+            <div class="drift-bar">
+              <div class="drift-fill drift-fill-91" style="--width: 91%"></div>
+            </div>
+            <span class="drift-value">91%</span>
+          </div>
+        </div>
+        <div class="drift-issues">
+          <div class="drift-issue">
+            <span class="issue-file">DataTable.tsx:47</span>
+            <span class="issue-desc">Custom padding override</span>
+          </div>
+          <div class="drift-issue">
+            <span class="issue-file">Modal.tsx:23</span>
+            <span class="issue-desc">Hardcoded #333333</span>
+          </div>
+        </div>
+        <div class="drift-action">
+          <span class="action-cmd">npx liftkit fix --auto</span>
+        </div>
       </div>
     )}
   </div>
@@ -275,6 +373,285 @@ const { caption, variant } = Astro.props;
     background: var(--color-paper-warm);
   }
 
+  /* Stream Selector Demo */
+  .demo-stream-selector {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .selector-question {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    color: var(--color-ink);
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .selector-options {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .selector-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .selector-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background: var(--color-paper);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+  }
+
+  .selector-option:hover {
+    border-color: var(--color-ink);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .selector-radio:checked + .selector-option {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border-color: var(--color-ink);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .option-icon {
+    font-size: 1.5rem;
+  }
+
+  .option-text {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+  }
+
+  .selector-results {
+    position: relative;
+  }
+
+  .result-card {
+    display: none;
+    padding: 1.25rem;
+    background: var(--color-paper);
+    border: 2px solid var(--color-ink);
+    border-radius: 0.5rem;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .selector-radio#stream-marketing:checked ~ .selector-results .result-marketing,
+  .selector-radio#stream-product:checked ~ .selector-results .result-product,
+  .selector-radio#stream-admin:checked ~ .selector-results .result-admin {
+    display: block;
+  }
+
+  .result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .result-stream {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .result-match {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-paper);
+    background: var(--color-ink);
+    padding: 0.25em 0.5em;
+    border-radius: 0.25rem;
+  }
+
+  .result-traits {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-secondary);
+  }
+
+  /* Drift Detector Demo */
+  .demo-drift-detector {
+    width: 100%;
+    max-width: 400px;
+    background: var(--color-paper);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .drift-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .drift-stream {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+  }
+
+  .drift-status {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .drift-status::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: #4ade80;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .drift-bars {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .drift-category {
+    display: grid;
+    grid-template-columns: 80px 1fr 40px;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .drift-label {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    color: var(--color-ink-muted);
+  }
+
+  .drift-bar {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .drift-fill {
+    height: 100%;
+    background: var(--color-ink);
+    border-radius: 4px;
+    width: var(--width);
+    animation: fillIn 1s ease-out;
+  }
+
+  @keyframes fillIn {
+    from { width: 0; }
+    to { width: var(--width); }
+  }
+
+  .drift-fill-87 {
+    background: #f59e0b;
+  }
+
+  .drift-value {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    color: var(--color-ink);
+    text-align: right;
+  }
+
+  .drift-warning {
+    color: #f59e0b;
+  }
+
+  .drift-issues {
+    padding: 0 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .drift-issue {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: 0.25rem;
+    border-left: 3px solid #f59e0b;
+  }
+
+  .issue-file {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .issue-desc {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-ink-secondary);
+  }
+
+  .drift-action {
+    padding: 1rem 1.25rem;
+    background: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .action-cmd {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    display: inline-block;
+  }
+
   @media (max-width: 640px) {
     .demo-container {
       padding: 1.5rem 1rem;
@@ -308,6 +685,21 @@ const { caption, variant } = Astro.props;
 
     .demo-btn-overflow {
       max-width: 100%;
+    }
+
+    .selector-options {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .selector-option {
+      width: 100%;
+      max-width: 200px;
+    }
+
+    .drift-category {
+      grid-template-columns: 70px 1fr 35px;
+      gap: 0.5rem;
     }
   }
 </style>
